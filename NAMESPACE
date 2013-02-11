@@ -1,0 +1,2 @@
+export(Rd2markdown)
+export(parseRd)

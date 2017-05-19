@@ -9,8 +9,6 @@
 #' @param verbose if \code{TRUE}, print messages as parsing.
 #' @param ... other parameters passed to \code{\link{Rd2markdown.rd}}
 #' @seealso Rd2markdown.rd
-#' @seealso Rd2HTML
-#' @export
 Rd2markdown <- function(pkg, outfile, verbose=TRUE) {
 	#require(tools)
 	

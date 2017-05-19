@@ -24,7 +24,5 @@ Murdoch, D. (2010).
 }
 \seealso{
 Rd2markdown.rd
-
-Rd2HTML
 }
 

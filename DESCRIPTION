@@ -1,7 +1,7 @@
 Package: Rd2md
-Title: Create Markdown Reference Manuals
+Title: Markdown Reference Manuals
 Version: 0.0.0.9000
-Authors@R: c(person("Julian", "Busch", email = "j.busch@ddm-group.ch", role = c("aut", "cre")), person("Felipe", "Sanchez", email = "f.sanchez@ddm-group.ch", role = "ctb"))
+Authors@R: person("Julian", "Busch", email = "jb@quants.ch", role = c("aut", "cre"))
 Description: To create Reference Manuals from Package sources.
 Depends:
     R (>= 3.2.3)

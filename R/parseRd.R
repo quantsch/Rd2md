@@ -40,7 +40,7 @@ parseRd <- function(rd, link.ext) {
 				results[['usage']] <- paste0("```r\n", 
 						paste(sapply(rd[[which(tags == '\\usage')]], 
 							   FUN=function(x) {
-									if (x=="\n") x=""
+									if (x[1]=="\n") x[1]="" # exception handling
 							   	parseTag(x, stripNewline=FALSE, stripWhite=FALSE, stripTab=FALSE, link.ext=link.ext)
 							   }), collapse=''), 
 					 "```\n")

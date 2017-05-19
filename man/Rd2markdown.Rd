@@ -2,9 +2,9 @@
 % Please edit documentation in R/Rd2markdown.R
 \name{Rd2markdown}
 \alias{Rd2markdown}
-\title{Convert Rd help files to markdown.}
+\title{Convert Rd help files to markdown}
 \usage{
-Rd2markdown(pkg, outfile, verbose = TRUE)
+Rd2markdown(pkg, outfile, verbose = FALSE)
 }
 \arguments{
 \item{pkg}{the package to generate files for.}
@@ -12,8 +12,6 @@ Rd2markdown(pkg, outfile, verbose = TRUE)
 \item{outfile}{Output file path}
 
 \item{verbose}{if \code{TRUE}, print messages as parsing.}
-
-\item{...}{other parameters passed to \code{\link{Rd2markdown.rd}}}
 }
 \description{
 Converts the help topics in the given package to markdown.

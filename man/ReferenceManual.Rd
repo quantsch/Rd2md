@@ -4,18 +4,20 @@
 \alias{ReferenceManual}
 \title{Create Reference Manual Markdown}
 \usage{
-ReferenceManual(pkg_, outdir_ = getwd(), verbose_ = FALSE)
+ReferenceManual(pkg = getwd(), outdir = getwd(), verbose = FALSE)
 }
 \arguments{
-\item{pkg_}{Package name or path to directory}
+\item{pkg}{Full path to package directory. Default value is the working directory}
 
-\item{outdir_}{output dir where the reference manual markdown shall be written to}
+\item{outdir}{Output directory where the reference manual markdown shall be written to}
 
-\item{verbose_}{IF \code{TRUE} all messages and steps will be printed.}
+\item{verbose}{If \code{TRUE} all messages and process steps will be printed.}
 }
 \description{
-This is a wrapper for a slightly
-amended version of package Rd2markdown by jbryer (Github).
-It takes the available functions and puts all into one document - the reference manual.
+This is a wrapper for a slightly amended version of package Rd2markdown by 
+[jbryer]('https://github.com/jbryer/Rd2markdown').
+It takes slightly amended versions of the available functions, so that the manuals are
+taken from source instead of from the libraries. 
+The result is the reference manual in markdown format.
 }
 

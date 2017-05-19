@@ -1,25 +1,75 @@
-#' @name Rd2markdown
-#' @title Convert Rd help files to markdown
-#' @description Converts the help topics in the given package to markdown.
-#' @references Murdoch, D. (2010). 
-#'           \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}.
-#' @param pkg the package to generate files for.
-#' @param outfile Output file path
-#' @param verbose if \code{TRUE}, print messages as parsing.
-#' @seealso Rd2markdown.rd
-Rd2markdown <- function(pkg, outfile, verbose=FALSE) {
+#' @title Rd file to markdown
+#' @description This function converts an Rd file into markdown format.
+#' @param rd an Rd data object.
+#' @param outfile Filepath to output file (markdown file)
+#' @param front.matter String 
+#' @return a character vector of length one where the element name is the topic
+#' name and the value is the filename.
+Rd2markdown <- function(rd, outfile, front.matter = "") {
+	# Global definitions for file parsing
+	file.ext <- "md"
+	link.ext <- "html"
+	section <- "#"
+	subsection <- "##"
+	section.sep <- "\n\n"
+	run.examples <- FALSE
 	
-	# Get file list of rd files
-	rd_files <- list.files(file.path(pkg, "man"), full.names = TRUE)
-	topics <- gsub(".rd","",gsub(".Rd","",basename(rd_files)))
-
-	# Parse rd files and add to ReferenceManual
-	results <- list()
-	for(i in 1:length(topics)) {#i=1
-		if(verbose) message(paste0("Writing topic: ", topics[i], "\n"))
-		rd <- parse_Rd(rd_files[i])
-		results[[i]] <- Rd2markdown.rd(rd=rd, outfile=outfile)
+	simpleCap <- function(x) {
+		s <- strsplit(x, " ")[[1]]
+		paste(toupper(substring(s, 1,1)), substring(s, 2), sep="", collapse=" ")
 	}
-
+	
+	# Parse rd file
+	results <- parseRd(rd)
+	
+	if(all(c("name","title") %in% names(results))) {
+		filename <- paste0(results$name, ".", file.ext)
+		results$filename <- filename
+		results$directory <- dirname(outfile)
+		# outfile <- paste0(outdir, "/", filename)
+		
+		#Print the results to file
+		if(!missing(front.matter)) {
+			cat(front.matter, file=outfile, append=TRUE)
+			cat(section.sep, file=outfile, append=TRUE)
+		}
+		
+		cat(paste0(section, " `", results$name, "`: ", results$title), file=outfile, append=TRUE)
+		cat(section.sep, file=outfile, append=TRUE)
+		
+		for(i in sections.print[!sections.print %in% c("name","title")]) {
+			if(i %in% names(results)) {
+				if(i == "examples") {
+					cat(paste(subsection, "Examples"), file=outfile, append=TRUE)
+					cat(section.sep, file=outfile, append=TRUE)
+					
+				# EXAMPLES
+				cat("```r", paste(results$examples, collapse="\n"), "```", file=outfile, append=TRUE)
+				} else if(i %in% c("usage")) {
+					cat(paste(subsection, simpleCap(i)), file=outfile, append=TRUE)
+					cat(section.sep, file=outfile, append=TRUE)
+					cat(paste0(results[[i]]), file=outfile, append=TRUE)
+					cat(section.sep, file=outfile, append=TRUE)	
+				} else if (i %in% c("arguments")) {
+					cat(paste(subsection, simpleCap(i)), file=outfile, append=TRUE)
+					cat(section.sep, file=outfile, append=TRUE)
+					# Prepare table with arguments
+					cat("Argument      |Description\n", file=outfile, append=TRUE)
+					cat("------------- |----------------\n", file=outfile, append=TRUE)
+					cat(paste0("```", names(results[[i]]), "```", "     |     ", results[[i]], collapse="\n"), file=outfile, append=TRUE)
+					cat(section.sep, file=outfile, append=TRUE)
+					
+				} else {
+					cat(paste(subsection, simpleCap(i)), file=outfile, append=TRUE)
+					cat(section.sep, file=outfile, append=TRUE)
+					cat(results[[i]], file=outfile, append=TRUE)
+					cat(section.sep, file=outfile, append=TRUE)
+				}
+			}
+		}
+	} else {
+		warning("name and title are required. Not creating markdown file")
+	}
+	
 	invisible(results)
 }

@@ -3,17 +3,19 @@
 \docType{package}
 \name{Rd2md-package}
 \alias{Rd2md-package}
-\title{Convert Rd help files to markdown.}
+\title{Reference Manual in Markdown}
 \description{
-Functions to parse and convert Rd files to markdown.
+Function to parse and convert Rd files to markdown format reference manual.
 }
 \author{
-Julian Busch, copied from Jason Bryer \email{jason@bryer.org}
+Julian Busch <jb@quants.ch>
 }
 \seealso{
 \code{knitr}
 }
 \keyword{Rd}
 \keyword{help}
+\keyword{manual}
 \keyword{markdown}
+\keyword{reference}
 

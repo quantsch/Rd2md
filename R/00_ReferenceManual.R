@@ -7,14 +7,15 @@
 #' @name ReferenceManual
 #' @title Create Reference Manual Markdown
 #' @description This is a wrapper for a slightly amended version of package Rd2markdown by 
-#' [jbryer]('https://github.com/jbryer/Rd2markdown').
+#' \href{https://github.com/jbryer/Rd2markdown}{jbryer}.
 #' It takes slightly amended versions of the available functions, so that the manuals are
 #' taken from source instead of from the libraries. 
 #' The result is the reference manual in markdown format.
 #' @param pkg Full path to package directory. Default value is the working directory
 #' @param outdir Output directory where the reference manual markdown shall be written to
 #' @param verbose If \code{TRUE} all messages and process steps will be printed.
-ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose=FALSE) {
+#' @references Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
+ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose = FALSE) {
 	# VALIDATION
 	pkg <- as.character(pkg)
 	if (length(pkg) != 1) stop("Please provide only one package at a time.")
@@ -38,7 +39,7 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose=FALSE) {
 	cat("\n\n", file=man_file, append=TRUE)
 	
 	
-	# Description file
+	# DESCRIPTION file
 	cat("# DESCRIPTION", file=man_file, append=TRUE)
 	cat("\n\n", file=man_file, append=TRUE)
 	cat("```\n", file=man_file, append=TRUE)
@@ -47,7 +48,17 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose=FALSE) {
 	cat("```\n", file=man_file, append=TRUE)
 	cat("\n\n", file=man_file, append=TRUE)
 	
-	# Add all functions of package
-	Rd2markdown(pkg=pkg_path, outfile=man_file, verbose=verbose)
+	# RD files
+	# Get file list of rd files
+	rd_files <- list.files(file.path(pkg_path, "man"), full.names = TRUE)
+	topics <- gsub(".rd","",gsub(".Rd","",basename(rd_files)))
+	
+	# Parse rd files and add to ReferenceManual
+	results <- list()
+	for(i in 1:length(topics)) {#i=1
+		if(verbose) message(paste0("Writing topic: ", topics[i], "\n"))
+		rd <- parse_Rd(rd_files[i])
+		results[[i]] <- Rd2markdown(rd=rd, outfile=man_file)
+	}
 	
 }

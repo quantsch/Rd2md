@@ -1,12 +1,9 @@
-#' Functions to parse and convert Rd files to markdown.
-#' 
-#' 
-#' 
 #' @name Rd2md-package
 #' @docType package
-#' @title Convert Rd help files to markdown.
-#' @author Julian Busch, copied from Jason Bryer \email{jason@@bryer.org}
-#' @keywords Rd help markdown
+#' @title Reference Manual in Markdown
+#' @description Function to parse and convert Rd files to markdown format reference manual.
+#' @author Julian Busch <jb@quants.ch>
+#' @keywords Rd help markdown reference manual
 #' @seealso \code{knitr}
 #' @import tools
 #' @import knitr

@@ -6,34 +6,29 @@
 #' @export
 #' @name ReferenceManual
 #' @title Create Reference Manual Markdown
-#' @description This is a wrapper for a slightly
-#' amended version of package Rd2markdown by jbryer (Github).
-#' It takes the available functions and puts all into one document - the reference manual.
-#' @param pkg_ Package name or path to directory
-#' @param outdir_ output dir where the reference manual markdown shall be written to
-#' @param verbose_ IF \code{TRUE} all messages and steps will be printed.
-ReferenceManual = function(pkg_, outdir_ = getwd(), verbose_=FALSE) {
+#' @description This is a wrapper for a slightly amended version of package Rd2markdown by 
+#' [jbryer]('https://github.com/jbryer/Rd2markdown').
+#' It takes slightly amended versions of the available functions, so that the manuals are
+#' taken from source instead of from the libraries. 
+#' The result is the reference manual in markdown format.
+#' @param pkg Full path to package directory. Default value is the working directory
+#' @param outdir Output directory where the reference manual markdown shall be written to
+#' @param verbose If \code{TRUE} all messages and process steps will be printed.
+ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose=FALSE) {
 	# VALIDATION
-	pkg = as.character(pkg_)
+	pkg <- as.character(pkg)
 	if (length(pkg) != 1) stop("Please provide only one package at a time.")
-	pkg_is_path = grepl("/|[\\]",pkg)
-	if (pkg_is_path) if (!dir.exists(pkg)) stop("Package path does not exist.")
-	outdir = as.character(outdir_)
+	outdir <- as.character(outdir)
 	if (length(outdir) != 1) stop("Please provide only one outdir at a time.")
 	if (!dir.exists(outdir)) stop("Output directory path does not exist.")
-	verbose = as.logical(verbose_)
+	verbose <- as.logical(verbose)
 	
-	pkg_name = ifelse(pkg_is_path, basename(pkg), pkg)
-	pkg_path = ifelse(pkg_is_path, pkg, {
-			pkgs_available = list.files(.libPaths()[1], full.names=TRUE)
-			pkg_n = grep(pkg_name, basename(pkgs_available))[1]
-			pkgs_available[pkg_n]
-		})
-	
-	man_title = paste0("# Reference Manual ", pkg_name)
+	pkg_path <- path.expand(pkg)
+	pkg_name <- basename(pkg_path)
+	if (!dir.exists(pkg_path)) stop("Package path does not exist.")
 	
 	# Output file for reference manual
-	man_file = file.path(outdir, paste0("Reference_Manual_", pkg_name, ".md"))
+	man_file <- file.path(outdir, paste0("Reference_Manual_", pkg_name, ".md"))
 	
 	# INIT REFERENCE MANUAL .md
 	cat("<!-- toc -->", file=man_file, append=FALSE)

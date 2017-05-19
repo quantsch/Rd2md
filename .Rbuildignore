@@ -4,4 +4,4 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
-^cran-commend.md$
+^cran-comments.md$

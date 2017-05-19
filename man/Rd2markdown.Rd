@@ -2,25 +2,22 @@
 % Please edit documentation in R/Rd2markdown.R
 \name{Rd2markdown}
 \alias{Rd2markdown}
-\title{Convert Rd help files to markdown}
+\title{Rd file to markdown}
 \usage{
-Rd2markdown(pkg, outfile, verbose = FALSE)
+Rd2markdown(rd, outfile, front.matter = "")
 }
 \arguments{
-\item{pkg}{the package to generate files for.}
+\item{rd}{an Rd data object.}
 
-\item{outfile}{Output file path}
+\item{outfile}{Filepath to output file (markdown file)}
 
-\item{verbose}{if \code{TRUE}, print messages as parsing.}
+\item{front.matter}{String}
+}
+\value{
+a character vector of length one where the element name is the topic
+name and the value is the filename.
 }
 \description{
-Converts the help topics in the given package to markdown.
-}
-\references{
-Murdoch, D. (2010). 
-          \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}.
-}
-\seealso{
-Rd2markdown.rd
+This function converts an Rd file into markdown format.
 }
 

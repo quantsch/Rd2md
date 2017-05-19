@@ -15,9 +15,12 @@ ReferenceManual(pkg = getwd(), outdir = getwd(), verbose = FALSE)
 }
 \description{
 This is a wrapper for a slightly amended version of package Rd2markdown by 
-[jbryer]('https://github.com/jbryer/Rd2markdown').
+\href{https://github.com/jbryer/Rd2markdown}{jbryer}.
 It takes slightly amended versions of the available functions, so that the manuals are
 taken from source instead of from the libraries. 
 The result is the reference manual in markdown format.
+}
+\references{
+Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
 }
 

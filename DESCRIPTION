@@ -1,21 +1,19 @@
-Package: Rd2markdown
-Type: Package
-Title: Convert Rd files to markdown
-Version: 0.6
-Date: 2013-02-10
-Author: Jason Bryer
-Maintainer: Jason Bryer <jason@bryer.org>
-Description: Functions to convert R help files (Rd files) to markdown.
-License: GPL (>=2)
-URL: http://jason.bryer.org/Rd2markdown, http://github.com/jbryer/Rd2markdown
-BugReports: https://github.com/jbryer/Rd2markdown/issues
-Collate:
-    'Rd2markdown-package.R'
-    'Rd2markdown.R'
-    'Rd2markdown.rd.R'
-    'parseRd.R'
-    'parseTag.R'
-    'utils.R'
+Package: Rd2md
+Title: Create Markdown Reference Manuals
+Version: 0.0.0.9000
+Authors@R: c(person("Julian", "Busch", email = "j.busch@ddm-group.ch", role = c("aut", "cre")), person("Felipe", "Sanchez", email = "f.sanchez@ddm-group.ch", role = "ctb"))
+Description: To create Reference Manuals from Package sources.
 Depends:
-    tools,
-    knitr
+    R (>= 3.2.3)
+Imports:
+		knitr,
+		tools
+Suggests:
+		testthat,
+    rmarkdown,
+    devtools
+License: GPL
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1

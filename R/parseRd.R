@@ -9,7 +9,13 @@
 #'        an markdown file.
 #' @export
 parseRd <- function(rd, link.ext) {
-	tags <- tools:::RdTags(rd)
+	RdTags = function(Rd){
+    	res <- sapply(Rd, attr, "Rd_tag")
+    	if (!length(res)) 
+        res <- character()
+    	res
+		}
+	tags <- RdTags(rd)
 	results <- list()
 	
 	if(!('\\name' %in% tags)) {
@@ -21,7 +27,7 @@ parseRd <- function(rd, link.ext) {
 			#Handle \argument section separately
 			if(i == '\\arguments') {
 				args <- rd[[which(tags == '\\arguments')]]
-				args.tags <- tools:::RdTags(args)
+				args.tags <- RdTags(args)
 				args <- args[which(args.tags == '\\item')]
 				params <- character()
 				for(i in seq_along(args)) {
@@ -32,14 +38,17 @@ parseRd <- function(rd, link.ext) {
 					names(params)[length(params)] <- param.name
 				}
 				results$arguments <- params
-			} else if(i %in% c('\\usage')) {
-				results[['usage']] <- paste('    ', sapply(rd[[which(tags == '\\usage')]], 
-						   FUN=function(x) {
-						   parseTag(x, stripNewline=FALSE, link.ext=link.ext)
-						   }), collapse='')
+			} else if (i %in% c('\\usage')) {
+				results[['usage']] <- paste0("```r\n", 
+						paste(sapply(rd[[which(tags == '\\usage')]], 
+							   FUN=function(x) {
+									if (x=="\n") x=""
+							   	parseTag(x, stripNewline=FALSE, stripWhite=FALSE, stripTab=FALSE, link.ext=link.ext)
+							   }), collapse=''), 
+					 "```\n")
 			} else if(i %in% tags) {
 				key <- substr(i, 2, nchar(i))
-				results[[key]] <- paste(sapply(rd[[which(tags==i)]], FUN=function(x) {
+				results[[key]] <- paste(sapply(rd[[which(tags==i)[1]]], FUN=function(x) {
 					parseTag(x, stripNewline=FALSE, link.ext=link.ext)
 				} ), collapse=' ')
 			}

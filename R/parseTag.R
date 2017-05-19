@@ -25,7 +25,7 @@ parseTag <- function(x, pre=character(), post=character(),
 		post <- c(post, '`')
 		x <- parseTag(x[[1]], pre, post)
 	} else if(rdtag == '\\eqn') {
-		message(paste0('Equation used, be sure to include MathJax.'))
+		# message(paste0('Equation used, be sure to include MathJax.'))
 		pre <- c('$', pre)
 		post <- c(post, '$')
 		x <- paste0(parseTag(x[[1]], pre, post, stripWhite=TRUE, 
@@ -39,8 +39,6 @@ parseTag <- function(x, pre=character(), post=character(),
 		if(attr(x[[1]], 'Rd_tag') != 'TEXT') { 
 			warning('\\link is not the inner most tag. All other nested tags will be ignored.')
 		}
-		#TODO: see if the link is to another package
-		#utils:::index.search('trips', find.package(), TRUE)
 		x <- paste('[', pre, parseTag(x[[1]], stripNewline=stripNewline), post, '](', 
 				   parseTag(x[[1]], stripNewline=stripNewline), '.', link.ext,')', sep='')
 	} else if(rdtag == '\\url') {
@@ -48,7 +46,7 @@ parseTag <- function(x, pre=character(), post=character(),
 	} else if(rdtag == '\\href') {
 		x <- paste0('[', as.character(x[[2]]), '](', as.character(x[[1]]), ')')
 	} else if(rdtag == '\\item') {
-		x <- '\n\n * '
+		x <- '\n\n* '
 	} else if(rdtag == '\\itemize') {
 		x <- paste(sapply(x, parseTag), collapse=' ')
 	} else if(rdtag == '\\enumerate') {

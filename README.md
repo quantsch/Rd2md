@@ -1,3 +1,21 @@
+# Installation
+
+To install the `Rd2md` package, you can either use the official CRAN repository or install directly from github.
+
+From CRAN:
+
+```{r, eval=FALSE}
+install.packages("Rd2md")
+```
+
+From Github:
+```{r, eval=FALSE}
+## if not already installed:
+# install.packages("devtools") 
+library(devtools)
+install_github("quants-ch/Rd2md")
+```
+
 # Reference Manual To PDF
 
 The Reference Manual of a package exported as PDF is an R command shipped with R.

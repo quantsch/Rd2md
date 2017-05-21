@@ -1,11 +1,12 @@
+#' @export
+#' @name Rd2markdown
 #' @title Rd file to markdown
 #' @description This function converts an Rd file into markdown format.
 #' @param rd an Rd data object.
 #' @param outfile Filepath to output file (markdown file)
-#' @param front.matter String 
-#' @return a character vector of length one where the element name is the topic
+#' @return character vector of length one where the element name is the topic
 #' name and the value is the filename.
-Rd2markdown <- function(rd, outfile, front.matter = "") {
+Rd2markdown <- function(rd, outfile, append=TRUE) {
 	# Global definitions for file parsing
 	file.ext <- "md"
 	link.ext <- "html"
@@ -28,12 +29,10 @@ Rd2markdown <- function(rd, outfile, front.matter = "") {
 		results$directory <- dirname(outfile)
 		# outfile <- paste0(outdir, "/", filename)
 		
-		#Print the results to file
-		if(!missing(front.matter)) {
-			cat(front.matter, file=outfile, append=TRUE)
-			cat(section.sep, file=outfile, append=TRUE)
-		}
+		# INIT file if required
+		cat("", file=outfile, append=append)
 		
+
 		cat(paste0(section, " `", results$name, "`: ", results$title), file=outfile, append=TRUE)
 		cat(section.sep, file=outfile, append=TRUE)
 		

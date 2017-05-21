@@ -13,9 +13,17 @@
 #' The result is the reference manual in markdown format.
 #' @param pkg Full path to package directory. Default value is the working directory
 #' @param outdir Output directory where the reference manual markdown shall be written to
+#' @param front.matter String with yaml-style heading of markdown file.
 #' @param verbose If \code{TRUE} all messages and process steps will be printed.
 #' @references Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
-ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose = FALSE) {
+#' @examples 
+#' ## give source directory of your package
+#' pkg_dir = "~/git/MyPackage"
+#' ## specify, where reference manual shall be stored
+#' out_dir = "/var/www/html/R_Web_app/md/"
+#' ## create reference manual
+#' ## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
+ReferenceManual <- function(pkg = getwd(), outdir = getwd(), front.matter = "", verbose = FALSE) {
 	# VALIDATION
 	pkg <- as.character(pkg)
 	if (length(pkg) != 1) stop("Please provide only one package at a time.")
@@ -32,11 +40,13 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose = FALSE) {
 	man_file <- file.path(outdir, paste0("Reference_Manual_", pkg_name, ".md"))
 	
 	# INIT REFERENCE MANUAL .md
-	cat("<!-- toc -->", file=man_file, append=FALSE)
-	cat("\n\n", file=man_file, append=TRUE)
+	cat(front.matter, file=outfile, append=FALSE) # yaml
+	cat(section.sep, file=outfile, append=TRUE)
+	cat("<!-- toc -->", file=man_file, append=TRUE)
+	cat(section.sep, file=man_file, append=TRUE)
 	# Date
 	cat(format(Sys.Date(), "%B %d, %Y"), file=man_file, append=TRUE)
-	cat("\n\n", file=man_file, append=TRUE)
+	cat(section.sep, file=man_file, append=TRUE)
 	
 	
 	# DESCRIPTION file
@@ -58,7 +68,7 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), verbose = FALSE) {
 	for(i in 1:length(topics)) {#i=1
 		if(verbose) message(paste0("Writing topic: ", topics[i], "\n"))
 		rd <- parse_Rd(rd_files[i])
-		results[[i]] <- Rd2markdown(rd=rd, outfile=man_file)
+		results[[i]] <- Rd2markdown(rd=rd, outfile=man_file, append=TRUE)
 	}
 	
 }

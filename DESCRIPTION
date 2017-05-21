@@ -2,7 +2,7 @@ Package: Rd2md
 Title: Markdown Reference Manuals
 Version: 0.0.1
 Authors@R: person("Julian", "Busch", email = "jb@quants.ch", role = c("aut", "cre"))
-Description: To create Reference Manuals from Package sources.
+Description: Reference Manuals can be created in markdown format from package source documentation files. The native R functionalities only allow pdf exports of reference manuals. The functions to parse .Rd files to .md files are also available.
 Depends:
     R (>= 3.2.3)
 Imports:

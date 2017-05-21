@@ -2,11 +2,11 @@
 #' @name Rd2markdown
 #' @title Rd file to markdown
 #' @description This function converts an Rd file into markdown format.
-#' @param rd an Rd data object.
+#' @param rdfile Filepath to an .Rd file
 #' @param outfile Filepath to output file (markdown file)
 #' @return character vector of length one where the element name is the topic
 #' name and the value is the filename.
-Rd2markdown <- function(rd, outfile, append=TRUE) {
+Rd2markdown <- function(rdfile, outfile, append=FALSE) {
 	# Global definitions for file parsing
 	file.ext <- "md"
 	link.ext <- "html"
@@ -21,6 +21,7 @@ Rd2markdown <- function(rd, outfile, append=TRUE) {
 	}
 	
 	# Parse rd file
+	rd <- parse_Rd(rdfile)
 	results <- parseRd(rd)
 	
 	if(all(c("name","title") %in% names(results))) {

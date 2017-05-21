@@ -6,7 +6,12 @@
 #' @param rd An \code{Rd} object
 #' @param link.ext file extension for links
 #' @return a list with the parts of the Rd object that will be used for creating
-#'        an markdown file.
+#' a markdown file.
+#' @examples 
+#' ## rd source (from parse_Rd function of tools package)
+#' rdfile = "~/git/MyPackage/man/myfun.Rd"
+#' rd = tools::parse_Rd(rdfile)
+#' ## parseRd(rd, "html")
 parseRd <- function(rd, link.ext) {
 
 	

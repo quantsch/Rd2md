@@ -6,6 +6,13 @@
 #' @param outfile Filepath to output file (markdown file)
 #' @return character vector of length one where the element name is the topic
 #' name and the value is the filename.
+#' @examples 
+#' ## give a markdown source file
+#' rdfile = "~/git/MyPackage/man/myfun.Rd"
+#' ## specify, where markdown shall be stored
+#' outfile = "/var/www/html/R_Web_app/md/myfun.md"
+#' ## create markdown
+#' ## Rd2markdown(rdfile = rdfile, outfile = outfile)
 Rd2markdown <- function(rdfile, outfile, append=FALSE) {
 	# Global definitions for file parsing
 	file.ext <- "md"

@@ -40,8 +40,8 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), front.matter = "", 
 	man_file <- file.path(outdir, paste0("Reference_Manual_", pkg_name, ".md"))
 	
 	# INIT REFERENCE MANUAL .md
-	cat(front.matter, file=outfile, append=FALSE) # yaml
-	cat(section.sep, file=outfile, append=TRUE)
+	cat(front.matter, file=man_file, append=FALSE) # yaml
+	cat(section.sep, file=man_file, append=TRUE)
 	cat("<!-- toc -->", file=man_file, append=TRUE)
 	cat(section.sep, file=man_file, append=TRUE)
 	# Date

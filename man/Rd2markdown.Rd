@@ -10,6 +10,8 @@ Rd2markdown(rdfile, outfile, append = FALSE)
 \item{rdfile}{Filepath to an .Rd file}
 
 \item{outfile}{Filepath to output file (markdown file)}
+
+\item{append}{If outfile exists,}
 }
 \value{
 Parsed Rd as named list

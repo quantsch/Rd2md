@@ -4,6 +4,7 @@
 #' @description This function converts an Rd file into markdown format.
 #' @param rdfile Filepath to an .Rd file
 #' @param outfile Filepath to output file (markdown file)
+#' @param append If outfile exists, 
 #' @return Parsed Rd as named list
 #' @examples 
 #' ## give a markdown source file
@@ -13,6 +14,17 @@
 #' ## create markdown
 #' ## Rd2markdown(rdfile = rdfile, outfile = outfile)
 Rd2markdown <- function(rdfile, outfile, append=FALSE) {
+	# VALIDATION
+	append = as.logical(append)
+	if (length(append) != 1) stop("Please provide append as single logical value.")
+	rdfile = as.character(rdfile)
+	if (length(rdfile) != 1) stop("Please provide rdfile as single character value (file path with extension).")
+	outfile = as.character(outfile)
+	if (length(outfile) != 1) stop("Please provide outfile as single character value (file path with extension).")
+	if (append) {
+		if (!file.exists(outfile)) stop("If append=TRUE, the outfile must exists already.")
+	}
+	
 	# Global definitions for file parsing
 	file.ext <- "md"
 	link.ext <- "html"

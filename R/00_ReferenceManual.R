@@ -70,7 +70,7 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), front.matter = "", 
 	results <- list()
 	for(i in 1:length(topics)) {#i=1
 		if(verbose) message(paste0("Writing topic: ", topics[i], "\n"))
-		results[[i]] <- Rd2markdown(rd=rd_files[i], outfile=man_file, append=TRUE)
+		results[[i]] <- Rd2markdown(rdfile=rd_files[i], outfile=man_file, append=TRUE)
 	}
 	
 }

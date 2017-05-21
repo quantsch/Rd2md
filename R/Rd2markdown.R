@@ -22,11 +22,7 @@ Rd2markdown <- function(rdfile, outfile, append=FALSE) {
 	section.sep <- "\n\n"
 	run.examples <- FALSE
 	
-	simpleCap <- function(x) {
-		s <- strsplit(x, " ")[[1]]
-		paste(toupper(substring(s, 1,1)), substring(s, 2), sep="", collapse=" ")
-	}
-	
+		
 	# Parse rd file
 	rd <- parse_Rd(rdfile)
 	results <- parseRd(rd)

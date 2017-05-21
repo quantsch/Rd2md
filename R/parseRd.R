@@ -13,15 +13,11 @@
 #' rd = tools::parse_Rd(rdfile)
 #' ## parseRd(rd, "html")
 parseRd <- function(rd, link.ext) {
-
 	
-	# extract tags
-	RdTags = function(Rd){
-    	res <- sapply(Rd, attr, "Rd_tag")
-    	if (!length(res)) 
-        res <- character()
-    	res
-		}
+	# VALIDATION
+	if (!("Rd" %in% class(rd))) stop("Please provide Rd object to parse.")
+	
+	
 	tags <- RdTags(rd)
 	results <- list()
 	

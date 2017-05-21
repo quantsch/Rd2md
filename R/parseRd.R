@@ -1,6 +1,6 @@
 #' @export
 #' @name parseRd
-#' @title Parse an Rd object.
+#' @title Parse an Rd object
 #' @description This function will parse an Rd object returning a list with each section. The
 #' contents of each element of the list will be converted to markdown.
 #' @param rd An \code{Rd} object

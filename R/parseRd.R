@@ -1,12 +1,16 @@
+#' @export
 #' @name parseRd
 #' @title Parse an Rd object.
 #' @description This function will parse an Rd object returning a list with each section. The
 #' contents of each element of the list will be converted to markdown.
-#' @param rd and Rd object.
-#' @param link.ext file extension for links.
+#' @param rd An \code{Rd} object
+#' @param link.ext file extension for links
 #' @return a list with the parts of the Rd object that will be used for creating
 #'        an markdown file.
 parseRd <- function(rd, link.ext) {
+
+	
+	# extract tags
 	RdTags = function(Rd){
     	res <- sapply(Rd, attr, "Rd_tag")
     	if (!length(res)) 

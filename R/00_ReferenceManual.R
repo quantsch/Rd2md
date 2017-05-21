@@ -36,6 +36,9 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), front.matter = "", 
 	pkg_name <- basename(pkg_path)
 	if (!dir.exists(pkg_path)) stop("Package path does not exist.")
 	
+	# PARAMS
+	section.sep = "\n\n"
+	
 	# Output file for reference manual
 	man_file <- file.path(outdir, paste0("Reference_Manual_", pkg_name, ".md"))
 	

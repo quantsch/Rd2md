@@ -26,7 +26,7 @@ This fact is used to replicate a Reference Manual in markdown format.
 
 # Reference Manual To Markdown
 
-There is actually only one function exported, namely
+There main function to create the reference manual in markdown format is
 
 ```{r, eval=FALSE}
 ReferenceManual(pkg, outdir = getwd(), verbose=FALSE)
@@ -34,5 +34,6 @@ ReferenceManual(pkg, outdir = getwd(), verbose=FALSE)
 
 For the `pkg_` variable, provide the full **file path** of the source code of the package.
 
-Be aware that this uses **source** code only. Installed packages are not
+Be aware that this uses **source** code only. This means, it will look into the `man` directory of your package source and take all `.Rd` files into considerations.
+
 

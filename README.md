@@ -8,16 +8,18 @@ R CMD Rd2pdf
 
 However, pdf versions are quite static and nothing can really be done with it. 
 
-The single .Rd files are quite flexible and can be converted to .md files. 
+The single .Rd files are well structured and can easily parsed to .md files. Thanks to [jbryer]('https://github.com/jbryer/Rd2markdown') to publish the relevant code.
 
 This fact is used to replicate a Reference Manual in markdown format.
 
 # Reference Manual To Markdown
 
-The main function is 
+There main function to create the reference manual in markdown format is
 
 ```{r, eval=FALSE}
-ReferenceManual(pkg_, outdir_ = getwd())
+ReferenceManual(pkg, outdir = getwd(), verbose=FALSE)
 ```
 
 For the `pkg_` variable, provide the full **file path** of the source code of the package.
+
+Be aware that this uses **source** code only. This means, it will look into the `man` directory of your package source and take all `.Rd` files into considerations.

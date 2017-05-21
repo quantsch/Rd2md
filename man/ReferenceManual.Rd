@@ -4,12 +4,15 @@
 \alias{ReferenceManual}
 \title{Create Reference Manual Markdown}
 \usage{
-ReferenceManual(pkg = getwd(), outdir = getwd(), verbose = FALSE)
+ReferenceManual(pkg = getwd(), outdir = getwd(), front.matter = "",
+  verbose = FALSE)
 }
 \arguments{
 \item{pkg}{Full path to package directory. Default value is the working directory}
 
 \item{outdir}{Output directory where the reference manual markdown shall be written to}
+
+\item{front.matter}{String with yaml-style heading of markdown file.}
 
 \item{verbose}{If \code{TRUE} all messages and process steps will be printed.}
 }
@@ -17,8 +20,16 @@ ReferenceManual(pkg = getwd(), outdir = getwd(), verbose = FALSE)
 This is a wrapper for a slightly amended version of package Rd2markdown by 
 \href{https://github.com/jbryer/Rd2markdown}{jbryer}.
 It takes slightly amended versions of the available functions, so that the manuals are
-taken from source instead of from the libraries. 
+taken from package sources (in man/ dir) instead of from the libraries. 
 The result is the reference manual in markdown format.
+}
+\examples{
+## give source directory of your package
+pkg_dir = "~/git/MyPackage"
+## specify, where reference manual shall be stored
+out_dir = "/var/www/html/R_Web_app/md/"
+## create reference manual
+## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
 }
 \references{
 Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}

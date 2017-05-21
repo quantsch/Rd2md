@@ -5,8 +5,8 @@
 #' contents of each element of the list will be converted to markdown.
 #' @param rd An \code{Rd} object
 #' @param link.ext file extension for links
-#' @return a list with the parts of the Rd object that will be used for creating
-#' a markdown file.
+#' @return a named list with the parts of the Rd object that will be used for creating
+#' a markdown file
 #' @examples 
 #' ## rd source (from parse_Rd function of tools package)
 #' rdfile = "~/git/MyPackage/man/myfun.Rd"

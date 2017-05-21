@@ -2,12 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{stripWhite}
 \alias{stripWhite}
-\title{Strip white space.}
+\title{Strip white space}
 \usage{
 stripWhite(x)
 }
 \arguments{
-\item{x}{character to strip white space from.}
+\item{x}{character to strip white space from}
 }
 \value{
 a character with white space stripped

@@ -4,20 +4,25 @@
 \alias{Rd2markdown}
 \title{Rd file to markdown}
 \usage{
-Rd2markdown(rd, outfile, front.matter = "")
+Rd2markdown(rdfile, outfile, append = FALSE)
 }
 \arguments{
-\item{rd}{an Rd data object.}
+\item{rdfile}{Filepath to an .Rd file}
 
 \item{outfile}{Filepath to output file (markdown file)}
-
-\item{front.matter}{String}
 }
 \value{
-a character vector of length one where the element name is the topic
-name and the value is the filename.
+Parsed Rd as named list
 }
 \description{
 This function converts an Rd file into markdown format.
+}
+\examples{
+## give a markdown source file
+rdfile = "~/git/MyPackage/man/myfun.Rd"
+## specify, where markdown shall be stored
+outfile = "/var/www/html/R_Web_app/md/myfun.md"
+## create markdown
+## Rd2markdown(rdfile = rdfile, outfile = outfile)
 }
 

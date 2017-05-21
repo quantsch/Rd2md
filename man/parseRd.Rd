@@ -2,21 +2,27 @@
 % Please edit documentation in R/parseRd.R
 \name{parseRd}
 \alias{parseRd}
-\title{Parse an Rd object.}
+\title{Parse an Rd object}
 \usage{
 parseRd(rd, link.ext)
 }
 \arguments{
-\item{rd}{and Rd object.}
+\item{rd}{An \code{Rd} object}
 
-\item{link.ext}{file extension for links.}
+\item{link.ext}{file extension for links}
 }
 \value{
-a list with the parts of the Rd object that will be used for creating
-       an markdown file.
+a named list with the parts of the Rd object that will be used for creating
+a markdown file
 }
 \description{
 This function will parse an Rd object returning a list with each section. The
 contents of each element of the list will be converted to markdown.
+}
+\examples{
+## rd source (from parse_Rd function of tools package)
+rdfile = "~/git/MyPackage/man/myfun.Rd"
+rd = tools::parse_Rd(rdfile)
+## parseRd(rd, "html")
 }
 

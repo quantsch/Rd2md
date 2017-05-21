@@ -4,8 +4,7 @@
 #' @description This function converts an Rd file into markdown format.
 #' @param rdfile Filepath to an .Rd file
 #' @param outfile Filepath to output file (markdown file)
-#' @return character vector of length one where the element name is the topic
-#' name and the value is the filename.
+#' @return Parsed Rd as named list
 #' @examples 
 #' ## give a markdown source file
 #' rdfile = "~/git/MyPackage/man/myfun.Rd"

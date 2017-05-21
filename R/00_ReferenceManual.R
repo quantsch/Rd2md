@@ -9,7 +9,7 @@
 #' @description This is a wrapper for a slightly amended version of package Rd2markdown by 
 #' \href{https://github.com/jbryer/Rd2markdown}{jbryer}.
 #' It takes slightly amended versions of the available functions, so that the manuals are
-#' taken from source instead of from the libraries. 
+#' taken from package sources (in man/ dir) instead of from the libraries. 
 #' The result is the reference manual in markdown format.
 #' @param pkg Full path to package directory. Default value is the working directory
 #' @param outdir Output directory where the reference manual markdown shall be written to

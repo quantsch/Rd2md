@@ -26,7 +26,7 @@ R CMD Rd2pdf
 
 However, pdf versions are quite static and nothing can really be done with it. 
 
-The single .Rd files are well structured and can easily parsed to .md files. Thanks to [jbryer]('https://github.com/jbryer/Rd2markdown') to publish the relevant code.
+The single .Rd files are well structured and can easily parsed to .md files. Thanks to [jbryer](https://github.com/jbryer/Rd2markdown) to publish the relevant code.
 
 This fact is used to replicate a Reference Manual in markdown format.
 

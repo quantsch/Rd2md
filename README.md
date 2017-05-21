@@ -1,3 +1,6 @@
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rd2md)](https://cran.r-project.org/package=Rd2md)
+
+
 # Installation
 
 To install the `Rd2md` package, you can either use the official CRAN repository or install directly from github.

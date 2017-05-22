@@ -10,3 +10,7 @@ NOTES:
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Julian Busch <jb@quants.ch>’
 New submission
+
+## Further comments
+
+* Bugfix added 2017-05-22

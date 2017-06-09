@@ -4,12 +4,10 @@
 \alias{parseRd}
 \title{Parse an Rd object}
 \usage{
-parseRd(rd, link.ext)
+parseRd(rd)
 }
 \arguments{
 \item{rd}{An \code{Rd} object}
-
-\item{link.ext}{file extension for links}
 }
 \value{
 a named list with the parts of the Rd object that will be used for creating
@@ -23,6 +21,5 @@ contents of each element of the list will be converted to markdown.
 ## rd source (from parse_Rd function of tools package)
 rdfile = "~/git/MyPackage/man/myfun.Rd"
 ## rd = tools::parse_Rd(rdfile)
-## parseRd(rd, "html")
+## parseRd(rd)
 }
-

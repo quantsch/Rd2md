@@ -7,12 +7,12 @@ To install the `Rd2md` package, you can either use the official CRAN repository 
 
 From CRAN:
 
-```{r, eval=FALSE}
+```r
 install.packages("Rd2md")
 ```
 
 From Github:
-```{r, eval=FALSE}
+```
 ## if not already installed:
 # install.packages("devtools") 
 library(devtools)
@@ -37,10 +37,12 @@ This fact is used to replicate a Reference Manual in markdown format.
 
 There main function to create the reference manual in markdown format is
 
-```{r, eval=FALSE}
+```r
 ReferenceManual(pkg, outdir = getwd(), verbose=FALSE)
 ```
 
-For the `pkg_` variable, provide the full **file path** of the source code of the package.
+For the `pkg` variable, provide the full **file path** of the source code of
+the package or the path to the binary directory (e.g. library path like
+`\\usr\\local\\lib\\R\\site-library\\Rd2md`).
 
-Be aware that this uses **source** code only. This means, it will look into the `man` directory of your package source and take all `.Rd` files into considerations.
+If you read from a binary file, please specify `type="bin"`.

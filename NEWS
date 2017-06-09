@@ -1,3 +1,11 @@
+Rd2md v0.0.3 (Release date: 2017-08-01)
+==============
+
+Changes:
+
+* Additional functionality to compile reference manuals / markdowns from binary packages
+* Minor changes in markdown output
+
 Rd2md v0.0.2 (Release date: 2017-05-19)
 ==============
 

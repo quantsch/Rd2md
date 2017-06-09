@@ -15,4 +15,3 @@ a character with white space stripped
 \description{
 Strip white space (spaces only) from the beginning and end of a character.
 }
-

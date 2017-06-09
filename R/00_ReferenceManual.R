@@ -11,10 +11,15 @@
 #' It takes slightly amended versions of the available functions, so that the manuals are
 #' taken from package sources (in man/ dir) instead of from the libraries. 
 #' The result is the reference manual in markdown format.
-#' @param pkg Full path to package directory. Default value is the working directory
+#' @param pkg Full path to package directory. Default value is the working directory. 
 #' @param outdir Output directory where the reference manual markdown shall be written to
-#' @param front.matter String with yaml-style heading of markdown file.
-#' @param verbose If \code{TRUE} all messages and process steps will be printed.
+#' @param type From which source the reference manual should be build. Use \code{src} for package source code and
+#' \code{bin} for binaries (e.g. from libraries).
+#' @param front.matter String with yaml-style heading of markdown file
+#' @param toc.matter String providing the table of contents. This is not auto-generated.
+#' The default value is a HTML comment, used by gitbook plugin \code{toc}, 
+#' see \url{https://www.npmjs.com/package/gitbook-plugin-toc}
+#' @param verbose If \code{TRUE} all messages and process steps will be printed
 #' @references Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
 #' @examples 
 #' ## give source directory of your package
@@ -23,7 +28,7 @@
 #' out_dir = "/var/www/html/R_Web_app/md/"
 #' ## create reference manual
 #' ## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
-ReferenceManual <- function(pkg = getwd(), outdir = getwd(), front.matter = "", verbose = FALSE) {
+ReferenceManual <- function(pkg = getwd(), outdir = getwd(), type = "src", front.matter = "", toc.matter = "<!-- toc -->", verbose = FALSE) {
 	# VALIDATION
 	pkg <- as.character(pkg)
 	if (length(pkg) != 1) stop("Please provide only one package at a time.")
@@ -35,6 +40,15 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), front.matter = "", 
 	pkg_path <- path.expand(pkg)
 	pkg_name <- basename(pkg_path)
 	if (!dir.exists(pkg_path)) stop("Package path does not exist.")
+	
+	type  <- match.arg(type, c("src", "bin"))
+	if (type == "src") {
+		mandir = "man"
+	} else {
+		mandir = "help"
+	}
+	if (length(mandir ) != 1) stop("Please provide only one manuals directory.")
+	if (!dir.exists(file.path(pkg_path, mandir))) stop("Package manuals path does not exist. Check working directory or given pkg and manuals path!")
 	
 	# PARAMS
 	section.sep = "\n\n"
@@ -54,23 +68,29 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd(), front.matter = "", 
 	
 	# DESCRIPTION file
 	cat("# DESCRIPTION", file=man_file, append=TRUE)
-	cat("\n\n", file=man_file, append=TRUE)
+	cat(section.sep, file=man_file, append=TRUE)
 	cat("```\n", file=man_file, append=TRUE)
 	DESCRIPTION = readLines(file.path(pkg_path, "DESCRIPTION"))
 	cat(paste0(DESCRIPTION, collapse="\n"), file=man_file, append=TRUE)
 	cat("```\n", file=man_file, append=TRUE)
-	cat("\n\n", file=man_file, append=TRUE)
+	cat(section.sep, file=man_file, append=TRUE)
 	
 	# RD files
+	results <- list()
+
 	# Get file list of rd files
-	rd_files <- list.files(file.path(pkg_path, "man"), full.names = TRUE)
-	topics <- gsub(".rd","",gsub(".Rd","",basename(rd_files)))
+	if (type == "src") {
+		rd_files <- list.files(file.path(pkg_path, mandir), full.names = TRUE)
+		topics <- gsub(".rd","",gsub(".Rd","",basename(rd_files)))
+	} else {
+		rd_files <- fetchRdDB(file.path(pkg_path, mandir, pkg_name))
+		topics <- names(rd_files)
+	}
 	
 	# Parse rd files and add to ReferenceManual
-	results <- list()
 	for(i in 1:length(topics)) {#i=1
 		if(verbose) message(paste0("Writing topic: ", topics[i], "\n"))
-		results[[i]] <- Rd2markdown(rdfile=rd_files[i], outfile=man_file, append=TRUE)
+		results[[i]] <- Rd2markdown(rdfile=rd_files[i], outfile=man_file, type=type, append=TRUE)
 	}
 	
 }

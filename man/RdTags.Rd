@@ -15,4 +15,3 @@ character vector with Rd tags
 \description{
 Extract Rd tags from Rd object
 }
-

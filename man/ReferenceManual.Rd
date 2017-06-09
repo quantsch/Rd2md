@@ -4,17 +4,24 @@
 \alias{ReferenceManual}
 \title{Create Reference Manual Markdown}
 \usage{
-ReferenceManual(pkg = getwd(), outdir = getwd(), front.matter = "",
-  verbose = FALSE)
+ReferenceManual(pkg = getwd(), outdir = getwd(), type = "src",
+  front.matter = "", toc.matter = "<!-- toc -->", verbose = FALSE)
 }
 \arguments{
-\item{pkg}{Full path to package directory. Default value is the working directory}
+\item{pkg}{Full path to package directory. Default value is the working directory.}
 
 \item{outdir}{Output directory where the reference manual markdown shall be written to}
 
-\item{front.matter}{String with yaml-style heading of markdown file.}
+\item{type}{From which source the reference manual should be build. Use \code{src} for package source code and
+\code{bin} for binaries (e.g. from libraries).}
 
-\item{verbose}{If \code{TRUE} all messages and process steps will be printed.}
+\item{front.matter}{String with yaml-style heading of markdown file}
+
+\item{toc.matter}{String providing the table of contents. This is not auto-generated.
+The default value is a HTML comment, used by gitbook plugin \code{toc}, 
+see \url{https://www.npmjs.com/package/gitbook-plugin-toc}}
+
+\item{verbose}{If \code{TRUE} all messages and process steps will be printed}
 }
 \description{
 This is a wrapper for a slightly amended version of package Rd2markdown by 
@@ -34,4 +41,3 @@ out_dir = "/var/www/html/R_Web_app/md/"
 \references{
 Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
 }
-

@@ -4,14 +4,17 @@
 \alias{Rd2markdown}
 \title{Rd file to markdown}
 \usage{
-Rd2markdown(rdfile, outfile, append = FALSE)
+Rd2markdown(rdfile, outfile, type = "src", append = FALSE)
 }
 \arguments{
-\item{rdfile}{Filepath to an .Rd file}
+\item{rdfile}{Filepath to an .Rd file or an \code{Rd} object to parse}
 
 \item{outfile}{Filepath to output file (markdown file)}
 
-\item{append}{If outfile exists,}
+\item{type}{From which source the reference manual should be build. Use \code{src} for package source code and
+\code{bin} for binaries (e.g. from libraries), loaded with \code{\link{fetchRdDB}} as \code{list} object.}
+
+\item{append}{If outfile exists, append to existing content}
 }
 \value{
 Parsed Rd as named list
@@ -27,4 +30,3 @@ outfile = "/var/www/html/R_Web_app/md/myfun.md"
 ## create markdown
 ## Rd2markdown(rdfile = rdfile, outfile = outfile)
 }
-

@@ -3,7 +3,7 @@
 #' @title Parse an Rd object
 #' @description This function will parse an Rd object returning a list with each section. The
 #' contents of each element of the list will be converted to markdown.
-#' @param rd An \code{Rd} object
+#' @param rd An \code{Rd} object.
 #' @return a named list with the parts of the Rd object that will be used for creating
 #' a markdown file
 #' @examples 

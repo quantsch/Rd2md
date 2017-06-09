@@ -5,30 +5,32 @@
 \title{Create Reference Manual Markdown}
 \usage{
 ReferenceManual(pkg = getwd(), outdir = getwd(), type = "src",
-  front.matter = "", toc.matter = "<!-- toc -->", verbose = FALSE)
+  front.matter = "", toc.matter = "<!-- toc -->",
+  date.format = "\%B \%d, \%Y", verbose = FALSE)
 }
 \arguments{
 \item{pkg}{Full path to package directory. Default value is the working directory.}
 
-\item{outdir}{Output directory where the reference manual markdown shall be written to}
+\item{outdir}{Output directory where the reference manual markdown shall be written to.}
 
 \item{type}{From which source the reference manual should be build. Use \code{src} for package source code and
 \code{bin} for binaries (e.g. from libraries).}
 
-\item{front.matter}{String with yaml-style heading of markdown file}
+\item{front.matter}{String with yaml-style heading of markdown file.}
 
 \item{toc.matter}{String providing the table of contents. This is not auto-generated.
-The default value is a HTML comment, used by gitbook plugin \code{toc}, 
-see \url{https://www.npmjs.com/package/gitbook-plugin-toc}}
+The default value is a HTML comment, used by gitbook plugin
+\href{https://www.npmjs.com/package/gitbook-plugin-toc}{toc}.}
+
+\item{date.format}{Date format that shall be written to the beginning of the reference manual. 
+If \code{NULL}, no date is written.
+Otherwise, provide a valid format (e.g. \code{\%Y-\%m-\%d}), see Details in \link[base]{strptime}.}
 
 \item{verbose}{If \code{TRUE} all messages and process steps will be printed}
 }
 \description{
-This is a wrapper for a slightly amended version of package Rd2markdown by 
-\href{https://github.com/jbryer/Rd2markdown}{jbryer}.
-It takes slightly amended versions of the available functions, so that the manuals are
-taken from package sources (in man/ dir) instead of from the libraries. 
-The result is the reference manual in markdown format.
+This is a wrapper to combine the Rd files of a package source or binary 
+into a reference manual in markdown format.
 }
 \examples{
 ## give source directory of your package
@@ -40,4 +42,7 @@ out_dir = "/var/www/html/R_Web_app/md/"
 }
 \references{
 Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
+}
+\seealso{
+Package \href{https://github.com/jbryer/Rd2markdown}{Rd2markdown} by jbryer
 }

@@ -10,15 +10,15 @@ parseTag(x, pre = character(), post = character(), stripNewline = TRUE,
 \arguments{
 \item{x}{element from an \code{Rd} class.}
 
-\item{pre}{a string to prepend to the parsed tag}
+\item{pre}{String to prepend to the parsed tag.}
 
-\item{post}{a string to append to the parsed tag}
+\item{post}{String to append to the parsed tag.}
 
-\item{stripNewline}{logical indicating whether to strip new line characters}
+\item{stripNewline}{Logical indicating whether to strip new line characters.}
 
-\item{stripWhite}{logical indicating whether to strip white space}
+\item{stripWhite}{Logical indicating whether to strip white space.}
 
-\item{stripTab}{logical indicating whether to strip tab characters}
+\item{stripTab}{Logical indicating whether to strip tab characters.}
 }
 \description{
 This function will convert an Rd element to markdown format. 

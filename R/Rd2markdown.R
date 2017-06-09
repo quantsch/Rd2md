@@ -2,11 +2,11 @@
 #' @name Rd2markdown
 #' @title Rd file to markdown
 #' @description This function converts an Rd file into markdown format.
-#' @param rdfile Filepath to an .Rd file or an \code{Rd} object to parse
-#' @param outfile Filepath to output file (markdown file)
+#' @param rdfile Filepath to an .Rd file or an \code{Rd} object to parse.
+#' @param outfile Filepath to output file (markdown file).
 #' @param type From which source the reference manual should be build. Use \code{src} for package source code and
 #' \code{bin} for binaries (e.g. from libraries), loaded with \code{\link{fetchRdDB}} as \code{list} object.
-#' @param append If outfile exists, append to existing content
+#' @param append If outfile exists, append to existing content.
 #' @return Parsed Rd as named list
 #' @examples 
 #' ## give a markdown source file
@@ -51,13 +51,15 @@ Rd2markdown <- function(rdfile, outfile, type="src", append=FALSE) {
 		filename <- paste0(results$name, ".", file.ext)
 		results$filename <- filename
 		results$directory <- dirname(outfile)
-		# outfile <- paste0(outdir, "/", filename)
 		
 		# INIT file if required
 		cat("", file=outfile, append=append)
 		
-
-		cat(paste0(section, " `", results$name, "`: ", results$title), file=outfile, append=TRUE)
+		# HEADING
+		cat(paste0(section, " `", results$name, "`"), file=outfile, append=TRUE)
+		cat(section.sep, file=outfile, append=TRUE)
+		# title as normal text
+		cat(results$title, file=outfile, append=TRUE)
 		cat(section.sep, file=outfile, append=TRUE)
 		
 		for (i in sections.print[!sections.print %in% c("name","title")]) {

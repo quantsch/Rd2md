@@ -7,7 +7,7 @@
 parseRd(rd)
 }
 \arguments{
-\item{rd}{An \code{Rd} object}
+\item{rd}{An \code{Rd} object.}
 }
 \value{
 a named list with the parts of the Rd object that will be used for creating

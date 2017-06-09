@@ -4,11 +4,11 @@
 #' Note that links are only supported within a markdown document, referenced with #.
 #' Use \code{href} to link to external sources.
 #' @param x element from an \code{Rd} class.
-#' @param pre a string to prepend to the parsed tag
-#' @param post a string to append to the parsed tag
-#' @param stripNewline logical indicating whether to strip new line characters
-#' @param stripWhite logical indicating whether to strip white space
-#' @param stripTab logical indicating whether to strip tab characters
+#' @param pre String to prepend to the parsed tag.
+#' @param post String to append to the parsed tag.
+#' @param stripNewline Logical indicating whether to strip new line characters.
+#' @param stripWhite Logical indicating whether to strip white space.
+#' @param stripTab Logical indicating whether to strip tab characters.
 parseTag <- function(x
 							, pre=character()
 							, post=character()
@@ -16,7 +16,7 @@ parseTag <- function(x
 							, stripWhite=TRUE
 							, stripTab=TRUE
 							) {
-	
+								
 	rdtag <- attr(x, "Rd_tag")
 	if (is.null(rdtag) || rdtag %in% c("TEXT", "RCODE", "VERB")) {
 		x <- paste0(pre, as.character(x), post)
@@ -44,7 +44,7 @@ parseTag <- function(x
 		}
 		# only internal markdown links, referenced with #
 		x <- paste0("[", pre, parseTag(x[[1]], stripNewline=stripNewline), post, "](#", 
-				   parseTag(x[[1]], stripNewline=stripNewline), ")")
+			gsub(" ", "_", gsub("_", "", tolower(parseTag(x[[1]], stripNewline=stripNewline)))), ")")
 	} else if (rdtag == "\\url") {
 		x <- paste0("[", pre, as.character(x), post, "](", as.character(x), ")")
 	} else if (rdtag == "\\href") {

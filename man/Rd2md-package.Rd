@@ -5,7 +5,7 @@
 \alias{Rd2md-package}
 \title{Reference Manual in Markdown}
 \description{
-Function to parse and convert Rd files to markdown format reference manual.
+Functions to parse and convert Rd files to markdown format reference manual.
 }
 \seealso{
 \code{knitr}

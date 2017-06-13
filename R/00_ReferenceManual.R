@@ -65,14 +65,16 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd()
 	# INIT REFERENCE MANUAL .md
 	cat(front.matter, file=man_file, append=FALSE) # yaml
 	cat(section.sep, file=man_file, append=TRUE)
+	
+	# Table of contents
+	cat(toc.matter, file=man_file, append=TRUE)
+	cat(section.sep, file=man_file, append=TRUE)
+	
 	# Date
 	if (!is.null(date.format)) {
 		cat(format(Sys.Date(), date.format), file=man_file, append=TRUE)
 		cat(section.sep, file=man_file, append=TRUE)
 	}
-	# Table of contents
-	cat(toc.matter, file=man_file, append=TRUE)
-	cat(section.sep, file=man_file, append=TRUE)
 	
 	
 	

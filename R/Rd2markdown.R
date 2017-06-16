@@ -4,8 +4,6 @@
 #' @description This function converts an Rd file into markdown format.
 #' @param rdfile Filepath to an .Rd file or an \code{Rd} object to parse.
 #' @param outfile Filepath to output file (markdown file).
-#' @param type From which source the reference manual should be build. Use \code{src} for package source code and
-#' \code{bin} for binaries (e.g. from libraries), loaded with \code{\link{fetchRdDB}} as \code{list} object.
 #' @param append If outfile exists, append to existing content.
 #' @return Parsed Rd as named list
 #' @examples 
@@ -15,7 +13,7 @@
 #' outfile = "/var/www/html/R_Web_app/md/myfun.md"
 #' ## create markdown
 #' ## Rd2markdown(rdfile = rdfile, outfile = outfile)
-Rd2markdown <- function(rdfile, outfile, type="src", append=FALSE) {
+Rd2markdown <- function(rdfile, outfile, append=FALSE) {
 	# VALIDATION
 	append = as.logical(append)
 	if (length(append) != 1) stop("Please provide append as single logical value.")
@@ -25,7 +23,7 @@ Rd2markdown <- function(rdfile, outfile, type="src", append=FALSE) {
 	if (append) {
 		if (!file.exists(outfile)) stop("If append=TRUE, the outfile must exists already.")
 	}
-	type = match.arg(type, c("src", "bin"))
+	type = ifelse(inherits(rdfile, "Rd"), "bin", "src")
 	
 	# Global definitions for file parsing
 	file.ext <- "md"
@@ -45,6 +43,7 @@ Rd2markdown <- function(rdfile, outfile, type="src", append=FALSE) {
 		rd <- rdfile
 		class(rd) <- "Rd"
 	}
+	# takes as input an "Rd" object
 	results <- parseRd(rd)
 	
 	if (all(c("name","title") %in% names(results))) {

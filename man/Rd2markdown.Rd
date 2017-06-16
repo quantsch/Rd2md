@@ -4,15 +4,12 @@
 \alias{Rd2markdown}
 \title{Rd file to markdown}
 \usage{
-Rd2markdown(rdfile, outfile, type = "src", append = FALSE)
+Rd2markdown(rdfile, outfile, append = FALSE)
 }
 \arguments{
 \item{rdfile}{Filepath to an .Rd file or an \code{Rd} object to parse.}
 
 \item{outfile}{Filepath to output file (markdown file).}
-
-\item{type}{From which source the reference manual should be build. Use \code{src} for package source code and
-\code{bin} for binaries (e.g. from libraries), loaded with \code{\link{fetchRdDB}} as \code{list} object.}
 
 \item{append}{If outfile exists, append to existing content.}
 }

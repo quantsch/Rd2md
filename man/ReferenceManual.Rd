@@ -4,17 +4,15 @@
 \alias{ReferenceManual}
 \title{Create Reference Manual Markdown}
 \usage{
-ReferenceManual(pkg = getwd(), outdir = getwd(), type = "src",
-  front.matter = "", toc.matter = "<!-- toc -->",
-  date.format = "\%B \%d, \%Y", verbose = FALSE)
+ReferenceManual(pkg = getwd(), outdir = getwd(), front.matter = "",
+  toc.matter = "<!-- toc -->", date.format = "\%B \%d, \%Y",
+  verbose = FALSE)
 }
 \arguments{
-\item{pkg}{Full path to package directory. Default value is the working directory.}
+\item{pkg}{Full path to package directory. Default value is the working directory. 
+Alternatively, a package name can be passed. If this is the case, \code{\link[base]{find.package}} is applied.}
 
 \item{outdir}{Output directory where the reference manual markdown shall be written to.}
-
-\item{type}{From which source the reference manual should be build. Use \code{src} for package source code and
-\code{bin} for binaries (e.g. from libraries).}
 
 \item{front.matter}{String with yaml-style heading of markdown file.}
 

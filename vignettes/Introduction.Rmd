@@ -46,32 +46,34 @@ The prerequisites are:
 * `man` directory with `.Rd` files is available
 * Output directory is writeable
 
-To create the reference manual from the package source, use the `type="src"`
-parameter:
+To create the reference manual from the package source, use:
 
 ```{r, eval=FALSE}
-ReferenceManual(pkg, outdir, type="src")
+ReferenceManual(pkg = "Rd2md", outdir = getwd())
 ```
 
 For the `pkg` variable, provide the **path** of the source code of the
-package and the `outdir` can be any available directory path.
+package and the `outdir` can be any available directory path. Note that the
+source code path can also be relative from the current working directory.
 
 ## From Binary
 
 The prerequisites are:
 
-* Path to package binaries (most likely library path) is known and readable
+* Path to package binaries (most likely library path) is readable
 * `help` directory with `.rdb` file is available
 * Output directory is writeable
 
-
-To create the reference manual from the package binaries, use the `type="bin"`
-parameter:
+To create the reference manual from the package binaries, use:
 
 ```{r, eval=FALSE}
-ReferenceManual(pkg, outdir, type="bin")
+ReferenceManual(pkg = "Rd2md", outdir = getwd())
 ```
 
-E .g. a possible library path would
-be `/usr/local/lib/R/site-library/Rd2md`.
+In this situation, the `pkg` variable should be given as the package name only,
+without any path.
+
+**Remark**: If, in the current working directory, there is a directory with the
+same name as the package, it will try to read from that folder!
+
 

@@ -104,4 +104,6 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd()
 		results[[i]] <- Rd2markdown(rdfile=rd_files[i], outfile=man_file, append=TRUE)
 	}
 	
+	invisible(man_file)
+	
 }

@@ -1,5 +1,5 @@
 ## Test environments
-* ubuntu 14.04, R 3.2.3
+* CentOS 7.5, R 3.5.1
 * win-builder
 
 ## R CMD check results

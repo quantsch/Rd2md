@@ -4,8 +4,8 @@
 \alias{parseTag}
 \title{Tag from Rd Format to Markdown}
 \usage{
-parseTag(x, pre = character(), post = character(), stripNewline = TRUE,
-  stripWhite = TRUE, stripTab = TRUE)
+parseTag(x, pre = character(), post = character(),
+  stripNewline = TRUE, stripWhite = TRUE, stripTab = TRUE)
 }
 \arguments{
 \item{x}{element from an \code{Rd} class.}

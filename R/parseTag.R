@@ -58,5 +58,5 @@ parseTag <- function(x
 		x <- paste(sapply(x, parseTag), collapse=" ")
 	}
 	
-	return(x)
+	x
 }

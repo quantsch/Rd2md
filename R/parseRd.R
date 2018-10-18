@@ -50,8 +50,10 @@ parseRd <- function(rd) {
 			} else if (i %in% tags) {
 				key <- substr(i, 2, nchar(i))
 				results[[key]] <- paste(sapply(rd[[which(tags==i)[1]]], FUN=function(x) {
+				results[[key]] <- paste(sapply(unlist(rd[[which(tags==i)[1]]]), FUN=function(x) {
 					parseTag(x, stripNewline=FALSE)
 				} ), collapse=' ')
+				} ), collapse="")
 			}
 		}
 	}

@@ -1,8 +1,3 @@
-# Wrapper function to the process of creating the markdown reference manual
-# 
-# Author: jbusch
-###############################################################################
-
 #' @export
 #' @name ReferenceManual
 #' @title Create Reference Manual Markdown

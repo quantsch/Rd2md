@@ -39,19 +39,25 @@ parseRd <- function(rd) {
 					names(params)[length(params)] <- param.name
 				}
 				results$arguments <- params
-			} else if (i %in% c("\\usage")) {
+			} else if (i == "\\usage") {
 				results[["usage"]] <- paste0("```r\n", 
 						paste(sapply(rd[[which(tags == "\\usage")]], 
 							   FUN=function(x) {
-									if (x[1]=="\n") x[1]="" # exception handling
+									if (x[1]=="\n") x[1] <- "" # exception handling
 							   	parseTag(x, stripNewline=FALSE, stripWhite=FALSE, stripTab=FALSE)
 							   }), collapse=""), 
 					 "```\n")
+			} else if (i %in% c("\\examples", "\\example")) {
+			  key <- substr(i, 2, nchar(i))
+			  results[[key]] <- paste(sapply(rd[[which(tags==i)[1]]], FUN=function(x) {
+			    if (x[1]=="\n") x[1] <- "" # exception handling
+			    parseTag(x, stripNewline=FALSE)
+			  } ), collapse="")
 			} else if (i %in% tags) {
 				key <- substr(i, 2, nchar(i))
-				results[[key]] <- paste(sapply(unlist(rd[[which(tags==i)[1]]]), FUN=function(x) {
-					parseTag(x, stripNewline=FALSE)
-				} ), collapse="")
+				results[[key]] <- trim(paste(sapply(rd[[which(tags==i)[1]]], FUN=function(x) {
+				  parseTag(x, stripNewline=FALSE)
+				} ), collapse=" "))
 			}
 		}
 	}

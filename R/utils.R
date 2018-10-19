@@ -58,3 +58,11 @@ fetchRdDB <- function (filebase, key = NULL) {
   else invisible(res)
 }
 
+#' @title Trim
+#' @description Trim whitespaces and newlines before and after
+#' @param x String to trim
+#' @return character vector with stripped whitespaces
+trim <- function(x) {
+  gsub("^\\s+|\\s+$", "", x)
+}
+

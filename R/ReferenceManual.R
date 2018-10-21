@@ -19,8 +19,10 @@
 #' @examples 
 #' ## give source directory of your package
 #' pkg_dir = "~/git/MyPackage"
+#' 
 #' ## specify, where reference manual shall be stored
 #' out_dir = "/var/www/html/R_Web_app/md/"
+#' 
 #' ## create reference manual
 #' ## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
 ReferenceManual <- function(pkg = getwd(), outdir = getwd()
@@ -58,11 +60,11 @@ ReferenceManual <- function(pkg = getwd(), outdir = getwd()
 	
 	# INIT REFERENCE MANUAL .md
 	cat(front.matter, file=man_file, append=FALSE) # yaml
-	cat(section.sep, file=man_file, append=TRUE)
+	if (trim(front.matter)!="") cat(section.sep, file=man_file, append=TRUE)
 	
 	# Table of contents
 	cat(toc.matter, file=man_file, append=TRUE)
-	cat(section.sep, file=man_file, append=TRUE)
+	if (trim(toc.matter)!="") cat(section.sep, file=man_file, append=TRUE)
 	
 	# Date
 	if (!is.null(date.format)) {

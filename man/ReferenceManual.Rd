@@ -33,8 +33,10 @@ into a reference manual in markdown format.
 \examples{
 ## give source directory of your package
 pkg_dir = "~/git/MyPackage"
+
 ## specify, where reference manual shall be stored
 out_dir = "/var/www/html/R_Web_app/md/"
+
 ## create reference manual
 ## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
 }

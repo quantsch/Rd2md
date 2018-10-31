@@ -48,7 +48,6 @@ parseRd <- function(rd) {
 			} else if (i %in% c("\\examples", "\\example")) {
 			  key <- substr(i, 2, nchar(i))
 			  results[[key]] <- trim(paste(sapply(rd[[which(tags==i)[1]]], FUN=function(x) {
-			    if (x[1]=="\n") x[1] <- "" # exception handling
 			    parseTag(x, stripNewline=FALSE)
 			  } ), collapse=""))
 			} else if (i %in% tags) {

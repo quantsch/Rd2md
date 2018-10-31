@@ -24,10 +24,9 @@ parseTag <- function(x
 		if (stripNewline) { x <- gsub("\n", "", x) }
 		if (stripWhite) { x <- stripWhite(x) }
 	} else if (rdtag == "\\dontrun") {
-	  x <- paste(sapply(x, FUN=function(x) {
-	    if (x[1]=="\n") x[1] <- "" # exception handling
+	  x <- trim(paste(sapply(x, FUN=function(x) {
 	    parseTag(x, stripNewline=FALSE)
-	  } ), collapse="")
+	  } ), collapse=""))
 	} else if (rdtag == "\\code") {
 		pre <- c("`", pre)
 		post <- c(post, "`")

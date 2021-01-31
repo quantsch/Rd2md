@@ -4,9 +4,14 @@
 \alias{ReferenceManual}
 \title{Create Reference Manual Markdown}
 \usage{
-ReferenceManual(pkg = getwd(), outdir = getwd(), front.matter = "",
-  toc.matter = "<!-- toc -->", date.format = "\%B \%d, \%Y",
-  verbose = FALSE)
+ReferenceManual(
+  pkg = getwd(),
+  outdir = getwd(),
+  front.matter = "",
+  toc.matter = "<!-- toc -->",
+  date.format = "\%B \%d, \%Y",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{pkg}{Full path to package directory. Default value is the working directory. 

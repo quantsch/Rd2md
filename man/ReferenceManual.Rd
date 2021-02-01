@@ -4,9 +4,14 @@
 \alias{ReferenceManual}
 \title{Create Reference Manual Markdown}
 \usage{
-ReferenceManual(pkg = getwd(), outdir = getwd(), front.matter = "",
-  toc.matter = "<!-- toc -->", date.format = "\%B \%d, \%Y",
-  verbose = FALSE)
+ReferenceManual(
+  pkg = getwd(),
+  outdir = getwd(),
+  front.matter = "",
+  toc.matter = "<!-- toc -->",
+  date.format = "\%B \%d, \%Y",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{pkg}{Full path to package directory. Default value is the working directory. 
@@ -41,7 +46,7 @@ out_dir = "/var/www/html/R_Web_app/md/"
 ## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
 }
 \references{
-Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
+Murdoch, D. (2010). \href{https://developer.R-project.org/parseRd.pdf}{Parsing Rd files}
 }
 \seealso{
 Package \href{https://github.com/jbryer/Rd2markdown}{Rd2markdown} by jbryer

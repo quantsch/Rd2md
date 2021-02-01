@@ -14,7 +14,7 @@
 #' If \code{NULL}, no date is written.
 #' Otherwise, provide a valid format (e.g. \code{\%Y-\%m-\%d}), see Details in \link[base]{strptime}.
 #' @param verbose If \code{TRUE} all messages and process steps will be printed
-#' @references Murdoch, D. (2010). \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}
+#' @references Murdoch, D. (2010). \href{https://developer.R-project.org/parseRd.pdf}{Parsing Rd files}
 #' @seealso Package \href{https://github.com/jbryer/Rd2markdown}{Rd2markdown} by jbryer
 #' @examples 
 #' ## give source directory of your package

@@ -1,4 +1,6 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rd2md)](https://cran.r-project.org/package=Rd2md)
+![Unit_Test_Status_Badge](https://github.com/quantsch/Rd2md/actions/workflows/r-cmd-check.yaml/badge.svg?branch=master)
+
 
 
 # Installation

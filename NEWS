@@ -1,3 +1,13 @@
+rd2md v1.0.0 (Release date: 2024-03-10)
+==============
+
+Changes:
+
+* Renamed package from `Rd2md` to lowercase `rd2md`
+* Major refactoring with a S3 class based approach with completely new api
+* Greatly expanding supported documentation elements
+* Set `.Deprecated` calls for old api
+
 Rd2md v0.0.5 (Release date: 2021-02-01)
 ==============
 

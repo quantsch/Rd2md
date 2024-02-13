@@ -1,0 +1,9 @@
+FROM rocker/tidyverse:4.3.0
+
+# required for devtools::check()
+RUN R -e "install.packages('tinytex');tinytex::install_tinytex()" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends pandoc qpdf ghostscript
+
+COPY . /usr/local/src/package
+WORKDIR /usr/local/src/package

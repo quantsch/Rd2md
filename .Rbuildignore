@@ -6,4 +6,6 @@
 ^README-.*\.png$
 ^cran-comments.md$
 ^Makefile$
-^Dockerfile$
+^Dockerfile*
+^\.github$
+^tools$

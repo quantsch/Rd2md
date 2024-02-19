@@ -2,6 +2,7 @@
 % Please edit documentation in R/Rd2md-package.R
 \docType{package}
 \name{Rd2md-package}
+\alias{Rd2md}
 \alias{Rd2md-package}
 \title{Reference Manual in Markdown}
 \description{

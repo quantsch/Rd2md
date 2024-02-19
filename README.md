@@ -2,6 +2,19 @@
 ![Unit_Test_Status_Badge](https://github.com/quantsch/Rd2md/actions/workflows/r-cmd-check.yaml/badge.svg?branch=master)
 [![codecov](https://codecov.io/gh/quantsch/Rd2md/graph/badge.svg?token=0ZHTXDYG3T)](https://codecov.io/gh/quantsch/Rd2md)
 
+# TODOS
+
+* remove deps from purrr and other packages
+* add step in pipeline that would crash if documentation was not checked in
+* add unit tests in pipeline separate to R CMD check (fails way faster)
+* 
+
+# Concepts
+
+As little deps as possible
+
+Borrowed a lot of ideas and code snippets from pkgdown
+
 
 
 # Installation

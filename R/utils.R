@@ -1,30 +1,63 @@
-#' @title Strip white space
-#' @description Strip white space (spaces only) from the beginning and end of a character.
-#' @param x character to strip white space from
-#' @return a character with white space stripped
-stripWhite <- function(x) {
-	sub("([ ]+$)", "", sub("(^[ ]+)", "", x, perl=TRUE), perl=TRUE)
+#' @title Trim
+#' @description Trim whitespaces and newlines before and after
+#' @param x String to trim
+#' @return character vector with stripped whitespaces
+trim <- function(x) {
+  gsub("^\\s+|\\s+$", "", x)
 }
 
-#' @title Extract Rd tags
-#' @description Extract Rd tags from Rd object
-#' @param Rd Object of class \code{Rd}
-#' @return character vector with Rd tags
-RdTags = function(Rd) {
-  res <- sapply(Rd, attr, "Rd_tag")
-  if (!length(res)) 
-    res <- character()
-  res
+tr_ <- function(...) {
+  enc2utf8(gettext(..., domain = "R-pkgdown"))
 }
 
-#' @title Make first letter capital
-#' @description Capitalize the first letter of every new word. Very simplistic approach.
-#' @param x Character string
-#' @return character vector with capitalized first letters
-simpleCap <- function(x) {
-	s <- strsplit(x, " ")[[1]]
-	paste(toupper(substring(s, 1,1)), substring(s, 2), sep="", collapse=" ")
+split_at_linebreaks <- function(text) {
+  if (length(text) < 1)
+    return(character())
+  strsplit(text, "\\n\\s*\\n")[[1]]
 }
+
+# HTML-style named functions for text formatting
+
+a <- function(text, href) {
+  if (is.na(href)) return(text)
+  href <- utils::URLencode(href)
+  sprintf("[%s](%s)", text, href)
+}
+
+h <- function(text, section_level) {
+  prefix <- rep("#", section_level)
+  sprintf("%s %s\n\n", prefix, text)
+}
+
+p <- function(text) {
+  sprintf("%s\n\n", text)
+}
+
+b <- function(text) {
+  sprintf("**%s**", text)
+}
+
+i <- function(text) {
+  sprintf("*%s*", text)
+}
+
+bi <- function(text) {
+  sprintf("***%s***", text)
+}
+
+q <- function(text) {
+  sprintf("> %s", text)
+}
+
+code <- function(x) {
+  sprintf("`%s`", x)
+}
+
+pre <- function(x, lang = NULL) {
+  if (!is.null(lang)) lang <- sprintf("{%s}", lang)
+  sprintf("```%s\n%s\n```\n\n", lang, x)
+}
+
 
 #' @title Make first letter capital
 #' @description Capitalize the first letter of every new word. Very simplistic approach.
@@ -53,16 +86,34 @@ fetchRdDB <- function (filebase, key = NULL) {
     }
   }
   res <- lazyLoadDBexec(filebase, fun)
-  if (length(key)) 
+  if (length(key))
     res
   else invisible(res)
 }
 
-#' @title Trim
-#' @description Trim whitespaces and newlines before and after
-#' @param x String to trim
-#' @return character vector with stripped whitespaces
-trim <- function(x) {
-  gsub("^\\s+|\\s+$", "", x)
+# for testing package
+
+#' Translate an Rd string to its HTML output
+#'
+#' @param x Rd string. Backslashes must be double-escaped ("\\\\").
+#' @param fragment logical indicating whether this represents a complete Rd file
+#' @param ... additional arguments for as_markdown
+#'
+#' @examples
+#' rd2md("a\n%b\nc")
+#'
+#' rd2md("a & b")
+#'
+#' rd2md("\\strong{\\emph{x}}")
+#'
+#' @export
+rd2md <- function(x, fragment = TRUE, ...) {
+  md <- as_markdown(rd_text(x, fragment = fragment), ...)
+  trim(strsplit(trim(md), "\n")[[1]])
 }
 
+rd_text <- function(x, fragment = TRUE) {
+  con <- textConnection(x)
+  on.exit(close(con), add = TRUE)
+  set_classes(tools::parse_Rd(con, fragment = fragment, encoding = "UTF-8"))
+}

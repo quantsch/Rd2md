@@ -1,5 +1,4 @@
 #' @name Rd2md-package
-#' @docType package
 #' @title Reference Manual in Markdown
 #' @description Functions to parse and convert Rd files to markdown format reference manual.
 #' @author Julian Busch <jb@quants.ch>
@@ -7,7 +6,7 @@
 #' @seealso \code{knitr}
 #' @import tools
 #' @import knitr
-NULL
+"_PACKAGE"
 
 sections <- c("\\arguments", "\\author", "\\concept", "\\description",
 			  "\\details", "\\docType", "\\encoding", "\\format", "\\keyword", "\\name",

@@ -1,0 +1,29 @@
+FROM r-base:latest AS base
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    libfontconfig1-dev \
+    libharfbuzz-dev libfribidi-dev \
+    libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev \
+    libcurl4-openssl-dev
+
+RUN <<eof1
+#!/usr/bin/env Rscript 
+install.packages(c(
+    "devtools",
+    "testthat"
+))
+eof1
+
+COPY . /usr/local/src/package
+WORKDIR /usr/local/src/package
+
+FROM base AS test
+
+CMD ["R", "-e", "devtools::test()"]
+
+FROM base AS document
+
+CMD ["R", "-e", "devtools::document()"]

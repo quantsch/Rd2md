@@ -9,10 +9,6 @@ RdTags(Rd)
 \name{RdTags}
 \value{
 character vector with Rd tags
-\link{topic}
-\link[=dest]{name}
-\link[pkg]{foo}
-\link[pkg:bar]{foo}
 }
 \description{
 Extract Rd tags from Rd object

@@ -35,89 +35,81 @@
 #' ## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
 create_reference_manual <- function(
   pkg = getwd(),
-  outdir = getwd(),
-  front_matter = "",
-  toc_matter = "<!-- toc -->",
-  date_format = "%B %d, %Y",
-  verbose = FALSE
+  output_file = NULL,
+  output_format = md_document()
 ) {
-  # VALIDATION
-  stopifnot(dir.exists(pkg) && length(pkg) == 1)
-  stopifnot(dir.exists(outdir) && length(outdir) == 1)
-  verbose <- isTRUE(verbose)
+  pkg_info <- get_package_info(pkg)
+  output_file <- get_output_file(output_file, output_format, pkg_info)
 
-  # locate package
+  # Get file list of rd files
+  rd_files <- get_rd_files(
+    pkg_info$name,
+    pkg_info$manpath,
+    pkg_info$type
+  )
+
+  refman <- generate_refman(output_format, pkg_info, rd_files)
+
+  write_to_file(
+    refman,
+    file = output_file
+  )
+
+  invisible(output_file)
+}
+
+generate_refman <- function(output_format, pkg_info, rd_files) {
+  UseMethod("generate_refman")
+}
+
+write_to_file <- function(x, file, append = FALSE, sep = "\n") {
+  cat(x, file = file, append = append, sep = sep)
+}
+
+get_output_file <- function(output_file, output_format, pkg_info) {
+  if (is.null(output_file)) {
+    output_file <- file.path(
+      getwd(),
+      paste0(pkg_info$name, output_format$file_ext)
+    )
+  }
+  output_file
+}
+
+
+get_package_info <- function(pkg) {
   pkg_path <- path.expand(pkg)
   pkg_name <- basename(pkg_path)
   type <- "src"
   mandir <- "man"
 
   if (!dir.exists(pkg_path)) {
+    # find.package will throw an error if package is not found
     pkg_path <- find.package(pkg_name)
     type <- "bin"
     mandir <- "help"
   }
 
-  if (length(mandir) != 1) stop("Please provide only one manuals directory.")
-  if (!dir.exists(file.path(pkg_path, mandir)))
-    stop(
-      "Package manuals path does not exist.",
-      "Check working directory or given pkg and manuals path!"
-    )
+  manpath <- file.path(pkg_path, mandir)
+  if (!dir.exists(manpath))
+    stop("Path does not exist:", manpath)
 
-  write_to_file <- function(x, file = man_file, append = TRUE) {
-    cat(x, file = file, append = append)
-  }
+  list(
+    path = pkg_path,
+    name = pkg_name,
+    type = type,
+    mandir = mandir,
+    manpath = manpath
+  )
+}
 
-  # PARAMS
-  section_sep <- "\n\n"
-
-  # Output file for reference manual
-  man_file <- file.path(outdir, paste0("Reference_Manual_", pkg_name, ".md"))
-
-  # INIT REFERENCE MANUAL .md
-  write_to_file(front_matter, append = FALSE) # yaml
-  if (trim(front_matter) != "") write_to_file(section_sep)
-
-  # Table of contents
-  write_to_file(toc_matter)
-  if (trim(toc_matter) != "") write_to_file(section_sep)
-
-  # Date
-  if (!is.null(date_format)) {
-    write_to_file(format(Sys.Date(), date_format))
-    write_to_file(section_sep)
-  }
-
-  # DESCRIPTION file
-  write_to_file("# DESCRIPTION")
-  write_to_file(section_sep)
-  write_to_file("```\n")
-  write_to_file(read_description(pkg_path))
-  write_to_file("\n```\n")
-  write_to_file(section_sep)
-
-  # Get file list of rd files
+get_rd_files <- function(pkg_name, manpath, type) {
   if (type == "src") {
-    rd_files <- list.files(file.path(pkg_path, mandir), full.names = TRUE)
-    topics <- gsub(".rd", "", gsub(".Rd", "", basename(rd_files)))
+    rd_files <- list.files(manpath, full.names = TRUE)
   } else {
-    rd_files <- fetch_rd_db(file.path(pkg_path, mandir, pkg_name))
-    topics <- names(rd_files)
+    rd_files <- fetch_rd_db(file.path(manpath, pkg_name))
   }
-
-  # Parse rd files and add to ReferenceManual
-  for (rdfile in rd_files) {#i=1
-    if(verbose) message(paste0("Writing topic: ", rdfile, "\n"))
-    cat(
-      as_markdown(read_rdfile(rdfile)),
-      file = man_file,
-      append = TRUE
-    )
-  }
-
-  invisible(man_file)
-
+  rd_files
 }
 
 read_description <- function(path = ".") {
@@ -125,5 +117,5 @@ read_description <- function(path = ".") {
   if (!file.exists(path)) {
     stop("Can't find DESCRIPTION file.")
   }
-  paste0(readLines(path), collapse="\n")
+  paste0(readLines(path), collapse = "\n")
 }

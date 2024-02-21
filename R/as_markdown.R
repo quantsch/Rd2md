@@ -88,9 +88,9 @@ order_rdfile <- function(
 as_markdown.Rd <- function(x, ...) flatten_text(x, ...)
 
 #' @export
-as_markdown.rdfile <- function(x, ...) {
-  title <- sprintf("# `%s`\n\n", x$name$title)
-  description <- sprintf("%s\n\n", x$description$content)
+as_markdown.rdfile <- function(x, section_level, ...) {
+  title <- h(x$name$title, section_level)
+  description <- p(x$description$content)
 
   x <- order_rdfile(
     x,
@@ -204,7 +204,7 @@ as_markdown.tag_link <- function(x, ...) {
     # \link[=dest]{name}
     href <- downlit::href_topic(substr(opt, 2, nchar(opt)))
   } else {
-    match <- regexec('^([^:]+)(?:|:(.*))$', opt)
+    match <- regexec("^([^:]+)(?:|:(.*))$", opt)
     parts <- regmatches(opt, match)[[1]][-1]
 
     if (parts[[2]] == "") {
@@ -473,7 +473,7 @@ as_markdown.tag_code <-         function(x, ..., auto_link = TRUE) {
     href <- downlit::autolink_url(text)
     text <- a(text, href = href)
   }
-  paste0("<code>", text, "</code>")
+  code(text)
 }
 
 #' @export
@@ -540,16 +540,18 @@ as_markdown.tag_enc <- function(x, ...) {
 #' @export
 as_markdown.tag_tab <-      function(x, ...) ""
 #' @export
-as_markdown.tag_cr <-       function(x, ...) "<br />"
-#' @export
 as_markdown.tag_newcommand <- function(x, ...) ""
 #' @export
 as_markdown.tag_renewcommand <- function(x, ...) ""
 
 #' @export
 as_markdown.default <- function(x, ...) {
-  # TODO: does this drop user-defined macros?
-  cli::cli_warn("Unknown tag: {.cls {class(x)}}")
+  warning(
+    sprintf(
+      "Unknown as_markdown method for class(es): %s",
+      paste0(class(x), collapse = ", ")
+    )
+  )
   ""
 }
 

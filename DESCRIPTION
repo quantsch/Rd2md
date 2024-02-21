@@ -1,4 +1,4 @@
-Package: Rd2md
+Package: rd2md
 Title: Markdown Reference Manuals
 Version: 0.0.5
 Authors@R: person("Julian", "Busch", email = "jb@quants.ch", role = c("aut", "cre"))

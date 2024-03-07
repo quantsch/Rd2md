@@ -13,7 +13,6 @@ output_format <-  function(
   output_class_suffix,
   file_ext,
   parse_fun,
-  fmt_p_fun = function(x) x,
   ...
 ) {
   base_output_class <- "output_format"

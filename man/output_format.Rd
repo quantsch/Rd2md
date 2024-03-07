@@ -4,13 +4,7 @@
 \alias{output_format}
 \title{Output Format Definition}
 \usage{
-output_format(
-  output_class_suffix,
-  file_ext,
-  parse_fun,
-  fmt_p_fun = function(x) x,
-  ...
-)
+output_format(output_class_suffix, file_ext, parse_fun, ...)
 }
 \arguments{
 \item{output_class_suffix}{Suffix to class name. E.g. \code{md} for

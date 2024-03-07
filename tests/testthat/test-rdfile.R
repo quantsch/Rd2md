@@ -2,11 +2,6 @@ test_that("Output file of function is correct", {
   input_file <- "testdoc/man/fundoc.Rd"
   comp_file <- "testdoc-md/fundoc.md"
 
-  if (FALSE) {
-    devtools::install()
-    setwd("tests/testthat")
-  }
-
   test_output_value <- as_markdown(
     read_rdfile(
       path = input_file,

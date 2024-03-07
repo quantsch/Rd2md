@@ -12,14 +12,6 @@ rd_str_to_md(x, fragment = TRUE, ...)
 \item{fragment}{logical indicating whether this represents a complete Rd file}
 
 \item{...}{additional arguments for as_markdown}
-
-\item{parse_fun}{function to parse classes of \code{\link[=read_rdfile]{read_rdfile()}}.}
-
-\item{fmt_p_fun}{function for paragraph formatting}
-
-\item{fmt_code_fun}{function for code formatting}
-
-\item{fmt_li_fun}{function for list formatting}
 }
 \description{
 Note that this will always end in one newline \\n.

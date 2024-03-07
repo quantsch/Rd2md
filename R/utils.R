@@ -104,10 +104,6 @@ get_package_info <- function(pkg) {
 #'
 #' @param x Rd string. Backslashes must be double-escaped ("\\\\").
 #' @param fragment logical indicating whether this represents a complete Rd file
-#' @param parse_fun function to parse classes of [read_rdfile()].
-#' @param fmt_p_fun function for paragraph formatting
-#' @param fmt_code_fun function for code formatting
-#' @param fmt_li_fun function for list formatting
 #' @param ... additional arguments for as_markdown
 #'
 #' @examples

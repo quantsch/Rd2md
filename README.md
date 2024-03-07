@@ -1,6 +1,6 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rd2md)](https://cran.r-project.org/package=rd2md)
 ![Unit_Test_Status_Badge](https://github.com/quantsch/rd2md/actions/workflows/r-cmd-check.yaml/badge.svg?branch=master)
-[![codecov](https://codecov.io/gh/quantsch/rd2md/graph/badge.svg?token=0ZHTXDYG3T)](https://codecov.io/gh/quantsch/rd2md)
+[![codecov](https://codecov.io/gh/quantsch/rd2md/graph/badge.svg?token=0ZHTXDYG3T)](https://app.codecov.io/gh/quantsch/rd2md)
 
 
 # Installation

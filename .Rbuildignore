@@ -9,3 +9,4 @@
 ^Dockerfile*
 ^\.github$
 ^tools$
+^revdep$

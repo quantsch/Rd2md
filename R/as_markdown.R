@@ -491,13 +491,13 @@ as_markdown.tag_option <- wrap_flattened_text(code_md)
 as_markdown.tag_command <- wrap_flattened_text(code_md)
 
 #' @export
-as_markdown.tag_dfn <- as.character
+as_markdown.tag_dfn <- as_markdown.character
 #' @export
-as_markdown.tag_cite <- as.character
+as_markdown.tag_cite <- as_markdown.character
 #' @export
-as_markdown.tag_acronym <- as.character
+as_markdown.tag_acronym <- as_markdown.character
 #' @export
-as_markdown.tag_abbr <- as.character
+as_markdown.tag_abbr <- as_markdown.character
 
 #' @export
 as_markdown.tag_out <- function(x, ...) flatten_text_md(x, ..., escape = FALSE)

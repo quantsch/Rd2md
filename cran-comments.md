@@ -1,6 +1,9 @@
 ## Test environments
-* Ubuntu 18.04 LTS, R 3.6.3
-* win-builder
+* macos-latest, R version 'release'
+* windows-latest, R version 'release'
+* ubuntu-latest, R version 'devel'
+* ubuntu-latest, R version 'release'
+* ubuntu-latest, R version 'oldrel-1'
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs. 

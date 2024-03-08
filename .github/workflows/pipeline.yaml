@@ -74,7 +74,7 @@ jobs:
     if: ${{ github.base_ref == 'main' }}
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: CRAN-check ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false

@@ -1,4 +1,4 @@
-#' @name rd2md-package
+#' @name Rd2md-package
 #' @title Reference Manual in Markdown
 #' @description Functions to parse and convert Rd files to markdown format reference manual.
 #' @author Julian Busch <jb@quants.ch>

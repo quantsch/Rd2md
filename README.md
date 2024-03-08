@@ -1,23 +1,23 @@
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rd2md)](https://cran.r-project.org/package=rd2md)
-![Unit_Test_Status_Badge](https://github.com/quantsch/rd2md/actions/workflows/r-cmd-check.yaml/badge.svg?branch=master)
-[![codecov](https://codecov.io/gh/quantsch/rd2md/graph/badge.svg?token=0ZHTXDYG3T)](https://app.codecov.io/gh/quantsch/rd2md)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rd2md)](https://cran.r-project.org/package=Rd2md)
+![Unit_Test_Status_Badge](https://github.com/quantsch/Rd2md/actions/workflows/r-cmd-check.yaml/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/quantsch/Rd2md/graph/badge.svg?token=0ZHTXDYG3T)](https://app.codecov.io/gh/quantsch/Rd2md)
 
 
 # Installation
 
-To install the `rd2md` package, you can either use the official CRAN repository
+To install the `Rd2md` package, you can either use the official CRAN repository
 or install directly from github.
 
 From CRAN:
 
 ```r
-install.packages("rd2md")
+install.packages("Rd2md")
 ```
 
 From Github:
 
 ```r
-devtools::install_github("quantsch/rd2md")
+devtools::install_github("quantsch/Rd2md")
 ```
 
 The package does not have any third-party package dependencies as I wanted

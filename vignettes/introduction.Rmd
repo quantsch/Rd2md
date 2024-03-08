@@ -1,11 +1,11 @@
 ---
-title: "Introduction to rd2md"
+title: "Introduction to Rd2md"
 author: "J. Busch"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{Introduction rd2md}
+  %\VignetteIndexEntry{Introduction Rd2md}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

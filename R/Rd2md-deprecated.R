@@ -1,14 +1,14 @@
-#' @title Deprecated functions in package \pkg{rd2md}.
+#' @title Deprecated functions in package \pkg{Rd2md}.
 #' @description The functions listed below are deprecated and will be defunct in
 #'   the near future. When possible, alternative functions with similar
 #'   functionality are also mentioned. Help pages for deprecated functions are
 #'   available at `help("<function>-deprecated")`.
-#' @name rd2md-deprecated
+#' @name Rd2md-deprecated
 #' @keywords internal
 NULL
 
 #' @keywords internal
-#' @seealso [rd2md-deprecated] and
+#' @seealso [Rd2md-deprecated] and
 #'   package \href{https://github.com/jbryer/Rd2markdown}{Rd2markdown} by jbryer
 #' @name ReferenceManual-deprecated
 #' @title Create Reference Manual Markdown
@@ -37,9 +37,9 @@ NULL
 #' ## ReferenceManual(pkg = pkg_dir, outdir = out_dir)
 NULL
 
-#' @rdname rd2md-deprecated
+#' @rdname Rd2md-deprecated
 #' @section `ReferenceManual`:
-#'   For `ReferenceManual()`, use [rd2md::render_refman()].
+#'   For `ReferenceManual()`, use [Rd2md::render_refman()].
 #'
 #' @export
 ReferenceManual <- function(
@@ -67,7 +67,7 @@ ReferenceManual <- function(
 }
 
 #' @keywords internal
-#' @seealso [rd2md-deprecated]
+#' @seealso [Rd2md-deprecated]
 #' @name Rd2markdown-deprecated
 #' @title Rd file to markdown
 #' @description This function converts an Rd file into markdown format.
@@ -84,13 +84,13 @@ ReferenceManual <- function(
 #' ## Rd2markdown(rdfile = rdfile, outfile = outfile)
 NULL
 
-#' @rdname rd2md-deprecated
+#' @rdname Rd2md-deprecated
 #' @section `Rd2markdown`:
-#' For `Rd2markdown()`, use [rd2md::as_markdown()].
+#' For `Rd2markdown()`, use [Rd2md::as_markdown()].
 #'
 #' @export
 Rd2markdown <- function(rdfile, outfile, append=FALSE) {
-  .Deprecated("as_markdown", package = "rd2md")
+  .Deprecated("as_markdown", package = "Rd2md")
 
   cat(
     as_markdown(read_rdfile(rdfile)),

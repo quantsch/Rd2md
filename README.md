@@ -50,19 +50,24 @@ manual:
 ```r
 # required: a generic parsing function
 as_txt <- function(x, ...) UseMethod("as_txt")
-# required: a fallback, if not all tags are defined
+# required: introduces recursion
+process_txt_contents <- function(x, ...) {
+  # traverse through list and concatenate to string
+  if (is.list(x)) x[] <- lapply(x, as_txt, ...)
+  paste(as.character(x), collapse = "")
+}
+# required: a fallback as not all tags might have an `as_txt` method
 as_txt.default <- function(x, ...) {
-    # traverse through list and concatenate to string
-    if (is.list(x)) x[] <- lapply(x, as_txt)
-    paste(as.character(x), collapse = "")
+  process_txt_contents(x, ...)
 }
 # not required but improves output significantly:
-# we add a section title and a separator
+# we add a section title and a separator for readability
 as_txt.rdsection <- function(x, ...) {
-    paste0(
-    tag_to_title(x), "\n----------------\n\n",
-    as_txt.default(x), "\n\n"
-    )
+  paste0(
+    Rd2md:::tag_to_title(x),
+    "\n----------------\n\n",
+    process_txt_contents(x, ...), "\n\n"
+  )
 }
 # not required but improves output significantly:
 # we add a paragraph after the description file

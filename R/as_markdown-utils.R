@@ -94,6 +94,10 @@ describe_contents_md <- set_default_args_md(describe_contents)
 parse_items_md <- set_default_args_md(parse_items)
 parse_descriptions_md <- set_default_args_md(parse_descriptions)
 
+remove_obsolete_newlines <- function(text) {
+  gsub("\\n\\n+", "\n\n", text)
+}
+
 parse_section_md <- function(
   x,
   title = NULL,
@@ -103,8 +107,8 @@ parse_section_md <- function(
   if (is.null(title)) {
     title <- tag_to_title(x)
   }
-  paste0(
+  remove_obsolete_newlines(paste0(
     h_md(title, section_level),
-    flatten_para_md(describe_contents_md(x, ...), ...)
-  )
+    flatten_para_md(x, ...)
+  ))
 }

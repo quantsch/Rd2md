@@ -111,6 +111,9 @@ as_markdown.rdfragment <- function(x, ...) {
   )
 }
 
+#' @export
+as_markdown.NULL <- function(x, ...) ""
+
 # Sections ------------------------------------------------------------------
 
 #' @export

@@ -2,6 +2,7 @@
 
 S3method(as_markdown,"#ifdef")
 S3method(as_markdown,"#ifndef")
+S3method(as_markdown,"NULL")
 S3method(as_markdown,COMMENT)
 S3method(as_markdown,DESCRIPTION)
 S3method(as_markdown,LIST)

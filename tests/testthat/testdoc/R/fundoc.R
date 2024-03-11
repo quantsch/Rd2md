@@ -37,3 +37,35 @@ bind_cols <- function(
 Account <- setClass("Account",
   slots = list(balance = "numeric")
 )
+
+#' This is my Person class
+#'
+#' @description
+#' Person class description
+#' @field name Name of the person
+#' @field hair Hair colour
+#'
+#' @examples
+#' Person$new(name="Bill", hair="Blond")
+#' @export
+Person <- R6::R6Class("Person",
+  public = list(
+    name = NULL,
+    hair = NULL,
+
+    #' @description
+    #' Create a person
+    #' @param name Name of the person
+    #' @param hair Hair colour
+    initialize = function(name = NA, hair = NA) {
+      self$name <- name
+      self$hair <- hair
+    },
+
+    #' @description Set hair
+    #' @param val Hair colour
+    set_hair = function(val) {
+      self$hair <- val
+    }
+  )
+)

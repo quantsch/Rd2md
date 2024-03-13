@@ -12,22 +12,22 @@ bind_cols(
 \arguments{
 \item{...}{Data frames to combine. Each argument can either be a data frame,
 a list that could be a data frame, or a list of data frames.
-Inputs are [recycled][vctrs::theory-faq-recycling] to the same length,
+Inputs are \link[vctrs:theory-faq-recycling]{recycled} to the same length,
 then matched by position.}
 
-\item{.name_repair}{One of `"unique"`, `"universal"`, or
-`"check_unique"`. See [vctrs::vec_as_names()] for the meaning of these
+\item{.name_repair}{One of \code{"unique"}, \code{"universal"}, or
+\code{"check_unique"}. See \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}} for the meaning of these
 options.}
 }
 \value{
-A data frame the same type as the first element of `...`.
+A data frame the same type as the first element of \code{...}.
 }
 \description{
 Bind any number of data frames by column, making a wider result.
-This is similar to `do.call(cbind, dfs)`.
+This is similar to \code{do.call(cbind, dfs)}.
 
-Where possible prefer using a [join][left_join] to combine multiple
-data frames. `bind_cols()` binds the rows in order in which they appear
+Where possible prefer using a \link[=left_join]{join} to combine multiple
+data frames. \code{bind_cols()} binds the rows in order in which they appear
 so it is easy to create meaningless results without realising it.
 }
 \examples{

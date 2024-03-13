@@ -4,7 +4,7 @@ on:
     branches:
       - main
 
-name: release-actions
+name: Release Actions
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

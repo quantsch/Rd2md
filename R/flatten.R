@@ -3,14 +3,15 @@ flatten_text <- function(x, ...) {
   if (length(x) == 0) return("")
   parse_fun <- extract_from_dots("parse_fun", ...)
 
-  paste(
+  trimws(paste(
     sapply(x, parse_fun, ...),
     collapse = ""
-  )
+  ))
 }
 
 # make nice (multi) paragraph passages
 flatten_para <- function(x, ...) {
+  x <- x[!sapply(x, is_empty)]
   if (length(x) == 0) return("")
 
   parse_fun <- extract_from_dots("parse_fun", ...)
@@ -83,7 +84,7 @@ describe_contents <- function(x, ...) {
     } else if (any(sapply(x, inherits, "tag_item"))) {
       parse_descriptions(x, ...)
     } else {
-      flatten_para(x, ...)
+      flatten_text(x, ...)
     }
   }
   pieces <- split(x, group)
@@ -108,7 +109,7 @@ parse_items <- function(x, enum = FALSE, ...) {
 
   parse_item <- function(x, enum, ...) {
     x <- trim_ws_nodes(x)
-    items_str <- flatten_para(x, ...)
+    items_str <- flatten_text(x, ...)
     fmt_li_fun(items_str, enum = enum)
   }
   paste(
@@ -137,7 +138,7 @@ parse_descriptions <- function(rd, ...) {
         )
       )
     } else {
-      flatten_text(x, ...)
+      flatten_para(x, ...)
     }
   }
 

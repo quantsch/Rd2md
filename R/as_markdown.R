@@ -119,7 +119,13 @@ as_markdown.NULL <- function(x, ...) ""
 #' @export
 as_markdown.tag_alias <- parse_section_md
 #' @export
-as_markdown.tag_arguments <- parse_section_md
+as_markdown.tag_arguments <- function(x, section_level = 2, ...) {
+  title <- tag_to_title(x)
+  paste0(
+    h_md(title, section_level),
+    flatten_para_md(describe_contents_md(x, ...), ...)
+  )
+}
 
 #' @export
 as_markdown.tag_author <- parse_section_md
@@ -422,11 +428,11 @@ as_markdown.tag_figure <- function(x, ...) {
 
 #' @export
 as_markdown.tag_itemize <- function(x, ...) {
-  parse_items_md(x, ...)
+  flatten_para_md(parse_items_md(x, ...))
 }
 #' @export
 as_markdown.tag_enumerate <- function(x, ...) {
-  parse_items_md(x, enum = TRUE, ...)
+  flatten_para_md(parse_items_md(x, enum = TRUE, ...))
 }
 
 #' @export
@@ -437,7 +443,9 @@ as_markdown.tag_enumerate <- function(x, ...) {
 as_markdown.tag_describe <- function(x, ...) {
   args <- list(...)
   args$fmt_code_fun <- function(x) x
-  do.call(parse_descriptions_md, append(list(x = x), args))
+  flatten_para_md(
+    do.call(describe_contents_md, append(list(x = x), args))
+  )
 }
 
 # only used by parse_items() to split up sequence of tags

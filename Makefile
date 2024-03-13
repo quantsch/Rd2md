@@ -16,5 +16,9 @@ cran-check-rhub: build
 	docker run --rm -v ~/.local/share:/root/.local/share rd2md:latest \
 		R -e "install.packages('rhub');devtools::check_rhub(interactive=FALSE)"
 
+website: build
+	docker run --rm -v $(PWD):/usr/local/src/package rd2md:latest \
+		R -e "pkgdown::build_site()"
+
 build:
 	docker build -t rd2md:latest -f Dockerfile_dev .

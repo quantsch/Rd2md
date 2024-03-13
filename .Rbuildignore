@@ -10,3 +10,6 @@
 ^\.github$
 ^tools$
 ^revdep$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

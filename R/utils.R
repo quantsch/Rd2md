@@ -1,68 +1,137 @@
-#' @title Strip white space
-#' @description Strip white space (spaces only) from the beginning and end of a character.
-#' @param x character to strip white space from
-#' @return a character with white space stripped
-stripWhite <- function(x) {
-	sub("([ ]+$)", "", sub("(^[ ]+)", "", x, perl=TRUE), perl=TRUE)
-}
-
-#' @title Extract Rd tags
-#' @description Extract Rd tags from Rd object
-#' @param Rd Object of class \code{Rd}
-#' @return character vector with Rd tags
-RdTags = function(Rd) {
-  res <- sapply(Rd, attr, "Rd_tag")
-  if (!length(res)) 
-    res <- character()
-  res
-}
-
-#' @title Make first letter capital
-#' @description Capitalize the first letter of every new word. Very simplistic approach.
-#' @param x Character string
-#' @return character vector with capitalized first letters
-simpleCap <- function(x) {
-	s <- strsplit(x, " ")[[1]]
-	paste(toupper(substring(s, 1,1)), substring(s, 2), sep="", collapse=" ")
-}
-
-#' @title Make first letter capital
-#' @description Capitalize the first letter of every new word. Very simplistic approach.
-#' @param filebase The file path to the database (\code{.rdb} file), with no extension
-#' @param key Keys to fetch
-#' @return character vector with capitalized first letters
-fetchRdDB <- function (filebase, key = NULL) {
-  fun <- function(db) {
-    vals <- db$vals
-    vars <- db$vars
-    datafile <- db$datafile
-    compressed <- db$compressed
-    envhook <- db$envhook
-    fetch <- function(key) lazyLoadDBfetch(vals[key][[1L]], 
-        datafile, compressed, envhook)
-    if (length(key)) {
-      if (!key %in% vars) 
-        stop(gettextf("No help on %s found in RdDB %s", 
-            sQuote(key), sQuote(filebase)), domain = NA)
-      fetch(key)
-    }
-    else {
-      res <- lapply(vars, fetch)
-      names(res) <- vars
-      res
-    }
+extract_from_dots <- function(name, ...) {
+  args <- list(...)
+  if (!name %in% names(args)) {
+    stop("Please provide ", name, " in `...`.")
   }
-  res <- lazyLoadDBexec(filebase, fun)
-  if (length(key)) 
-    res
-  else invisible(res)
+  args[[name]]
 }
 
-#' @title Trim
-#' @description Trim whitespaces and newlines before and after
-#' @param x String to trim
-#' @return character vector with stripped whitespaces
-trim <- function(x) {
-  gsub("^\\s+|\\s+$", "", x)
+write_to_file <- function(x, file, append = FALSE, sep = "\n") {
+  cat(x, file = file, append = append, sep = sep)
+  invisible(file)
 }
 
+# if collapse = NULL a vector with file lines is returned
+read_file <- function(file, collapse = NULL) {
+  paste(
+    readChar(file, file.info(file)$size),
+    collapse = collapse
+  )
+}
+
+warn_not_implemented <- function(name, return_val = NULL) {
+  warning(
+    sprintf("%s not yet implemented. Returning: %s", name, return_val)
+  )
+  return_val
+}
+
+is_empty <- function(x) {
+  # lists or vectors do not classify as empty, even if c("", "")
+  if (length(x) > 1) return(FALSE)
+  # the following classify as empty:
+  # NULL, "", NA
+  is.null(x) || is.na(x) || trimws(x) == ""
+}
+
+# local_links: try to obtain links to local filesystem documentation instead
+#   of online sources
+get_topic_href <- function(topic, package = NULL, local_links = FALSE) {
+  if (is.null(package)) return(topic)
+  aliases <- readRDS(
+    system.file("help", "aliases.rds", package = package)
+  )
+  # reexports are from other packages
+  aliases <- aliases[names(aliases) != "reexports"]
+  rdname <- aliases[[topic]]
+  if (is_package_local(package) && isTRUE(local_links)) {
+    path <- find.package(package, quiet = TRUE)
+    file.path(path, "doc", paste0(rdname, ".html"))
+  } else {
+    paste0(get_package_url(package), "/", rdname, ".html")
+  }
+}
+
+get_package_url <- function(package) {
+  base_pkgs <- c(
+    "base", "compiler", "datasets", "graphics", "grDevices", "grid", "methods",
+    "parallel", "splines", "stats", "stats4", "tcltk", "tools", "utils"
+  )
+  if (package %in% base_pkgs) {
+    paste0("https://rdrr.io/r/", package)
+  } else {
+    paste0("https://rdrr.io/pkg/", package, "/man")
+  }
+}
+
+is_package_local <- function(package) {
+  # has to be local if no package is provided
+  if (is.null(package)) return(TRUE)
+  length(find.package(package, quiet = TRUE)) > 0
+}
+
+get_package_info <- function(pkg) {
+  pkg_path <- path.expand(pkg)
+  pkg_name <- basename(pkg_path)
+  type <- "src"
+  mandir <- "man"
+
+  if (!dir.exists(pkg_path)) {
+    # find.package will throw an error if package is not found
+    pkg_path <- find.package(pkg_name)
+    type <- "bin"
+    mandir <- "help"
+  }
+
+  manpath <- file.path(pkg_path, mandir)
+  if (!dir.exists(manpath))
+    stop("Path does not exist:", manpath)
+
+  list(
+    path = pkg_path,
+    name = pkg_name,
+    type = type,
+    mandir = mandir,
+    manpath = manpath
+  )
+}
+
+# for testing package -------------------------------------------------------
+
+#' Translate an Rd string to markdown
+#'
+#' Note that this will always end in one newline \\n.
+#'
+#' @param x Rd string. Backslashes must be double-escaped ("\\\\").
+#' @param fragment logical indicating whether this represents a complete Rd file
+#' @param ... additional arguments for as_markdown
+#'
+#' @examples
+#' rd_str_to_md("a\n%b\nc")
+#'
+#' rd_str_to_md("a & b")
+#'
+#' rd_str_to_md("\\strong{\\emph{x}}")
+#'
+#' rd_str_to_md("\\enumerate{\\item test 1\n\n\\item test 2}")
+#' rd_str_to_md("wrapped \\itemize{\\item test 1\n\\item test 2} in text")
+#'
+#' @export
+rd_str_to_md <- function(
+  x,
+  fragment = TRUE,
+  ...
+) {
+  as_markdown(
+    rd_text(x, fragment = fragment),
+    ...
+  )
+}
+
+rd_text <- function(x, fragment = TRUE) {
+  con <- textConnection(x)
+  on.exit(close(con), add = TRUE)
+  as_rdfragment(
+    tools::parse_Rd(con, fragment = fragment, encoding = "UTF-8")
+  )
+}

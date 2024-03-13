@@ -1,0 +1,89 @@
+---
+title: "Introduction to Rd2md"
+author: "J. Busch"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::pdf_document
+vignette: >
+  %\VignetteIndexEntry{Introduction Rd2md}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# PDF Reference Manual
+
+The Reference Manual of a package exported as PDF is a terminal command shipped
+with R. Given you are in the root of your package, the following will create
+the PDF manual:
+
+```
+R CMD Rd2pdf -o ReferenceManual.pdf .
+```
+
+However, other formats are only possible converting a single Rd file to
+html, LaTeX or text and there is no option to create a reference manual in
+those formats.
+
+This is where markdown comes in handy, as it can be further processed
+easily into a wide variety of formats and is also a go-to format for static
+website genererators.
+
+# Markdown Reference Manual
+
+The main functionality of this package is to create the reference manual in
+markdown format. 
+
+However, packages can be available in either source format (from development)
+or as binary packages (from libraries). This package can extract the
+documentation files from both and create the reference manual.
+
+## From Package Source
+
+The prerequisites are:
+
+* Path to package source readable
+* `man` directory with `.Rd` files is available
+* `DESCRIPTION` file is available in package root
+* Output directory is writeable
+
+To create the reference manual from the package source, use:
+
+```{r, eval=FALSE}
+render_refman()
+```
+
+This will default to the current working directory being the package root and
+the output file name to be `<pkg-name>.md`.
+
+You can also specify the `pkg` variable and provide the **path** of the source
+code of the package and the `output_file` can be any file path, including
+file extension:
+
+```{r, eval=FALSE}
+render_refman(
+  pkg = "path/to/package_root",
+  output_file = "path/to/output/reference_manual.md"
+)
+```
+
+## From Package Binary
+
+The prerequisites are:
+
+* Path to package binaries (most likely library path) is readable
+* `help` directory with `.rdb` file is available
+* `DESCRIPTION` file is available in package root
+* Output directory is writeable
+
+**Remark**: Package name must not be a directory in the current working
+directory, otherwise the function will try to read the source from that
+directory instead of searching the package in the R libraries.
+
+To create the reference manual from the package binaries, use:
+
+```{r, eval=FALSE}
+render_refman(pkg = "<pkg-name>")
+```
+
+In this situation, the `pkg` variable should be given as the package name only,
+without any path.

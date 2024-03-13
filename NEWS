@@ -1,3 +1,14 @@
+Rd2md v1.0.0 (Release date: 2024-03-13)
+==============
+
+Changes:
+
+* Major refactoring with a S3 class based approach with completely new api
+* Greatly expanding supported documentation elements (#2, #6, #7)
+* Header size available in new `md_document()` configuration (#8)
+* Add (basic) unit-tests (#5)
+* Set `.Deprecated` calls for old api
+
 Rd2md v0.0.5 (Release date: 2021-02-01)
 ==============
 

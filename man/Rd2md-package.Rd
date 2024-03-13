@@ -2,6 +2,7 @@
 % Please edit documentation in R/Rd2md-package.R
 \docType{package}
 \name{Rd2md-package}
+\alias{Rd2md}
 \alias{Rd2md-package}
 \title{Reference Manual in Markdown}
 \description{
@@ -11,7 +12,7 @@ Functions to parse and convert Rd files to markdown format reference manual.
 \code{knitr}
 }
 \author{
-Julian Busch <jb@quants.ch>
+Julian Busch \href{mailto:jb@quants.ch}{jb@quants.ch}
 }
 \keyword{Rd}
 \keyword{help}

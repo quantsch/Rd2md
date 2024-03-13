@@ -1,5 +1,4 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rd2md)](https://cran.r-project.org/package=Rd2md)
-![Unit_Test_Status_Badge](https://github.com/quantsch/Rd2md/actions/workflows/pipeline.yaml/badge.svg?branch=main)
 [![codecov](https://codecov.io/gh/quantsch/Rd2md/graph/badge.svg?token=0ZHTXDYG3T)](https://app.codecov.io/gh/quantsch/Rd2md)
 
 

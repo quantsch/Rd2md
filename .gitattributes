@@ -1,3 +1,6 @@
 # keep line-endings in unix format
 # we need concictency, given we unit-test on windows as well
 * text eol=lf
+
+# do not show Makefile in linguist stats
+Makefile -linguist-detectable

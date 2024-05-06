@@ -38,12 +38,14 @@ as_rdfragment <- function(x, subclass = NULL, ...) {
 
 parse_rd_file <- function(path, pkg_path = NULL) {
   enc <- "UTF-8"
-  if (getRversion() >= "3.4.0") {
-    # loadPkgRdMacros returns NULL if input pkg_path is NULL
+  # 'macros' definition from ?tools::parse_Rd:
+  macros <- file.path(R.home("share"). "Rd", "macros", "system.Rd")
+  if (!is.null(pkg_path)) {
     macros <- tools::loadPkgRdMacros(pkg_path)
+  }
+  if (getRversion() >= "3.4.0") {
     parsed_rd <- tools::parse_Rd(path, macros = macros, encoding = enc)
   } else if (getRversion() >= "3.2.0") {
-    macros <- tools::loadPkgRdMacros(pkg_path, TRUE)
     parsed_rd <- tools::parse_Rd(path, macros = macros, encoding = enc)
   } else {
     parsed_rd <- tools::parse_Rd(path, encoding = enc)

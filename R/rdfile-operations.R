@@ -39,7 +39,7 @@ as_rdfragment <- function(x, subclass = NULL, ...) {
 parse_rd_file <- function(path, pkg_path = NULL) {
   enc <- "UTF-8"
   # 'macros' definition from ?tools::parse_Rd:
-  macros <- file.path(R.home("share"). "Rd", "macros", "system.Rd")
+  macros <- file.path(R.home("share"), "Rd", "macros", "system.Rd")
   if (!is.null(pkg_path)) {
     macros <- tools::loadPkgRdMacros(pkg_path)
   }

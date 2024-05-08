@@ -29,6 +29,14 @@ bind_cols <- function(
   .name_repair = c("unique", "universal", "check_unique", "minimal")
 ) ""
 
+#' Function With User Defined Macro In Description
+#'
+#' @description
+#' CRANpkg macro: \CRANpkg{mycranpkg}
+#' @param Rd Object of class `Rd`
+#' @return Some return value
+fundoc_with_ud_macro <- function(Rd) ""
+
 #' An S4 class to represent a bank account.
 #'
 #' @slot balance A length-one numeric vector

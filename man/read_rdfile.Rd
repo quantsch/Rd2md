@@ -4,13 +4,10 @@
 \alias{read_rdfile}
 \title{Read .Rd file}
 \usage{
-read_rdfile(path, pkg_path = NULL, subclass = NULL)
+read_rdfile(path, subclass = NULL)
 }
 \arguments{
 \item{path}{File path of \verb{*.Rd}-file}
-
-\item{pkg_path}{Package path, required to load macros, see
-\code{\link[tools:loadRdMacros]{tools::loadPkgRdMacros()}}.}
 
 \item{subclass}{Potential subclass of returned \code{rdfile} object}
 }

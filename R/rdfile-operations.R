@@ -7,12 +7,10 @@ read_package_rdfiles <- function(pkg = ".", subclass = NULL) {
 #'
 #' And return object of class `rdfile`
 #' @param path File path of `*.Rd`-file
-#' @param pkg_path Package path, required to load macros, see
-#' [tools::loadPkgRdMacros()].
 #' @param subclass Potential subclass of returned `rdfile` object
 #' @export
-read_rdfile <- function(path, pkg_path = NULL, subclass = NULL) {
-  parsed_rd <- parse_rd_file(path, pkg_path)
+read_rdfile <- function(path, subclass = NULL) {
+  parsed_rd <- tools::parse_Rd(path, encoding = "UTF-8")
   as_rdfile(parsed_rd, subclass = subclass)
 }
 
@@ -34,21 +32,6 @@ as_rdfragment <- function(x, subclass = NULL, ...) {
     x_cls,
     class = c(subclass, "rdfragment")
   )
-}
-
-parse_rd_file <- function(path, pkg_path = NULL) {
-  enc <- "UTF-8"
-  if (getRversion() >= "3.4.0") {
-    # loadPkgRdMacros returns NULL if input pkg_path is NULL
-    macros <- tools::loadPkgRdMacros(pkg_path)
-    parsed_rd <- tools::parse_Rd(path, macros = macros, encoding = enc)
-  } else if (getRversion() >= "3.2.0") {
-    macros <- tools::loadPkgRdMacros(pkg_path, TRUE)
-    parsed_rd <- tools::parse_Rd(path, macros = macros, encoding = enc)
-  } else {
-    parsed_rd <- tools::parse_Rd(path, encoding = enc)
-  }
-  parsed_rd
 }
 
 # Convert RD attributes to S3 classes -------------------------------------

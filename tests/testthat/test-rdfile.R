@@ -5,7 +5,6 @@ test_that("Output file of function is correct", {
   test_output_value <- as_markdown(
     read_rdfile(
       path = input_file,
-      pkg_path = "testdoc",
       subclass = "refman_rdfile"
     )
   )
@@ -23,7 +22,6 @@ test_that("Output file of S4 class is correct", {
   test_output_value <- as_markdown(
     read_rdfile(
       path = input_file,
-      pkg_path = "testdoc",
       subclass = "refman_rdfile"
     )
   )
@@ -40,7 +38,6 @@ test_that("Output file of R6 class is correct", {
   test_output_value <- as_markdown(
     read_rdfile(
       path = input_file,
-      pkg_path = "testdoc",
       subclass = "refman_rdfile"
     )
   )

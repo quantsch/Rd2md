@@ -1,6 +1,6 @@
 Package: Rd2md
 Title: Markdown Reference Manuals
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: person("Julian", "Busch", email = "jb@quants.ch", role = c("aut", "cre"))
 Description: Native R only allows PDF exports of reference manuals.
     The 'Rd2md' package converts the package documentation files into

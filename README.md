@@ -1,6 +1,8 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rd2md)](https://cran.r-project.org/package=Rd2md)
 [![codecov](https://codecov.io/gh/quantsch/Rd2md/graph/badge.svg?token=0ZHTXDYG3T)](https://app.codecov.io/gh/quantsch/Rd2md)
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L3L2ZG7SC)
+
 
 # Installation
 
@@ -39,6 +41,7 @@ vignette("introduction")
 * fail early: introduce input validations for exposed functions
 * add header content in output_format to pass `date_format`, etc.
 * toc "<\!-- toc -->\n\n" and a front_matter implementation for markdown
+
 
 # Extension
 

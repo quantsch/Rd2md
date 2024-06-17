@@ -21,7 +21,6 @@ jobs:
       - name: Release to CRAN
         run: |
           pkg <- devtools::as.package(".")
-          built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE,
-          args = args)
+          built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE)
           devtools:::upload_cran(pkg, built_path)
         shell: Rscript {0}
